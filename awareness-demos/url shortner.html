@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+  <head>
+    <title>URL Shortner</title>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, user-scalable=no" name="viewport" />
+    <meta content="https://i.imgur.com/e4Jexcl.png" property="og:image" />
+    <link href="https://i.imgur.com/e4Jexcl.png" />
+    <link href="https://i.imgur.com/e4Jexcl.png" />
+    <link href="css/main.css" rel="stylesheet" />
+    <link href="as.webmanifest" rel="manifest" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="popup.js"></script>
+  </head>
+
+  <body style="margin: 0; padding: 0">
+    <div
+      class="pad-10 shadow bg-royal-blue relative"
+      style="margin-bottom: 15px; display: flex; align-items: center"
+    >
+      <span
+        class="white josefin-font f-20"
+        style="flex: 1; margin-left: 3px; margin-top: 2px"
+        >Link Shortner</span
+      >
+      <button
+        class="s-40 active circle btn right"
+        onclick="abt()"
+        style="background: transparent; display: flex; align-items: center"
+      >
+        <svg fill="#fff" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path
+            clip-rule="evenodd"
+            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+            fill-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div class="alert-blue margin-10">
+      <input
+        id="link"
+        type="text"
+        class="input-blue f-16 josefin-font"
+        style="width: 100%"
+        placeholder="Enter a link..."
+      />
+      <button
+        class="btn bg-blue josefin-font white pad-10 shadow radius-5 active f-16"
+        style="margin-top: 15px"
+        onclick="short(document.getElementById('link').value)"
+      >
+        Short Link</button
+      ><br />
+      <a
+        class="josefin-font"
+        id="sta"
+        style="display: none"
+        onclick="cpy()"
+      ></a>
+    </div>
+    <script>
+      var sta = document.getElementById("sta");
+
+      let requestHeaders = {
+        "Content-Type": "application/json",
+        apikey: "d4deb8f0ca6f4f24b38fcc3164b72b21",
+        workspace: "52e91ce99774498b8a5081729378b6a3",
+      };
+
+      function short(u) {
+        let linkRequest = {
+          destination: u,
+          domain: { fullName: "rebrand.ly" },
+        };
+        $.ajax({
+          url: "https://api.rebrandly.com/v1/links",
+          type: "post",
+          data: JSON.stringify(linkRequest),
+          headers: requestHeaders,
+          dataType: "json",
+          success: (link) => {
+            sta.innerText = link.shortUrl + " ⬅️click the link to copy";
+            sta.style.display = "block";
+            localStorage.setItem("x", link.shortUrl);
+          },
+        });
+      }
+      function cpy() {
+        navigator.clipboard.writeText(localStorage.getItem("x"));
+        as.toast({
+          type: "success",
+          title: "copied !",
+          timer: 2000,
+        });
+      }
+    </script>
+  </body>
+</html>

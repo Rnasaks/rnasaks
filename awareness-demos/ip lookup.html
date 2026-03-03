@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IP Lookup - Official</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f7fa;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+
+      .header {
+        background-color: #004080;
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .container {
+        max-width: 700px;
+        margin: 30px auto;
+        background: #fff;
+        border-radius: 8px;
+        padding: 30px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        color: #004080;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+      }
+
+      button {
+        width: 100%;
+        background: #004080;
+        color: #fff;
+        border: none;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #003060;
+      }
+
+      .result {
+        margin-top: 20px;
+        background: #f0f0f0;
+        padding: 15px;
+        border-left: 4px solid #004080;
+        white-space: pre-wrap;
+        font-size: 14px;
+        border-radius: 4px;
+      }
+
+      .json-key {
+        font-weight: bold;
+        color: #004080;
+      }
+
+      .json-value {
+        color: #006600;
+      }
+
+      #map {
+        width: 100%;
+        height: 300px;
+        margin-top: 20px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+      }
+
+      #map-link {
+        display: none;
+        margin-top: 10px;
+        padding: 12px;
+        background-color: #004080;
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 6px;
+        text-align: center;
+      }
+
+      #map-link:hover {
+        background-color: #003060;
+      }
+
+      footer {
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+        margin-top: 40px;
+        padding: 20px 0;
+        background: #f0f0f0;
+      }
+
+      footer a {
+        color: #004080;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>IP Lookup Tool</h1>
+      <p>
+        Secure & Accurate Geolocation Lookup <br />
+        Your IP: <span id="user-ip">Loading...</span>
+      </p>
+    </div>
+
+    <div class="container">
+      <h2>Enter IP Address</h2>
+      <input type="text" id="ipInput" placeholder="e.g. 8.8.8.8" />
+      <button id="lookupBtn" onclick="lookupIP()">Lookup</button>
+      <div class="result" id="result"></div>
+      <a id="map-link" target="_blank">View on Google Maps</a>
+      <div id="map"></div>
+    </div>
+
+    <script>
+      fetch("https://api.ipify.org?format=json")
+        .then((res) => res.json())
+        .then((data) => {
+          document.getElementById("user-ip").textContent = data.ip;
+        });
+
+      function formatJson(data) {
+        let formatted = "";
+        for (const key in data) {
+          if (key === "country_flag") {
+            formatted += `<span><span class='json-key'>${key}</span>: 
+                        <img src="flag.php?url=${encodeURIComponent(data[key])}" 
+                             height="16" 
+                             style="pointer-events: none;" 
+                             alt="Country Flag" /></span><br>`;
+          } else {
+            formatted += `<span><span class='json-key'>${key}</span>: <span class='json-value'>${data[key]}</span></span><br>`;
+          }
+        }
+        return formatted;
+      }
+
+      function initMap(lat, lng) {
+        const location = { lat: parseFloat(lat), lng: parseFloat(lng) };
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 8,
+          center: location,
+        });
+        new google.maps.Marker({ position: location, map: map });
+
+        const mapLink = document.getElementById("map-link");
+        mapLink.href = `https://www.google.com/maps?q=${lat},${lng}`;
+        mapLink.style.display = "block";
+      }
+
+      async function lookupIP() {
+        const ip = document.getElementById("ipInput").value;
+        const resultDiv = document.getElementById("result");
+        const button = document.getElementById("lookupBtn");
+
+        if (!ip) {
+          alert("Please enter an IP address");
+          return;
+        }
+
+        button.disabled = true;
+        button.textContent = "Looking up...";
+        resultDiv.innerHTML = "";
+
+        try {
+          const response = await fetch(`lookup.php?ip=${ip}`);
+          const data = await response.json();
+          resultDiv.innerHTML = formatJson(data);
+          if (data.latitude && data.longitude) {
+            initMap(data.latitude, data.longitude);
+          }
+        } catch (error) {
+          resultDiv.innerHTML =
+            "<p style='color: red;'>Failed to fetch data</p>";
+        }
+
+        button.disabled = false;
+        button.textContent = "Lookup";
+      }
+    </script>
+
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMUAXE1_OFWyINMOCVuBQmwh96WtzSYUs&callback=initMap"
+    ></script>
+
+    <footer>
+      <p>&copy; 2025 Bangladesh Hacking Help Center - PX Tools</p>
+      <p>
+        Developed by
+        <a href="https://www.facebook.com/rnasaks" target="_blank">Rnasaks</a>
+      </p>
+    </footer>
+  </body>
+</html>

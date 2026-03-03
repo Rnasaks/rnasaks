@@ -1,0 +1,7 @@
+{
+  "buildCommand": "echo 'Static files only'",
+  "public": true,
+  "env": {
+    "PORT": "5000"
+  }
+}

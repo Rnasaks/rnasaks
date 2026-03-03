@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Hacking Full Course - BD Hackers Elite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0a0a23, #1a0a3a, #000428);
+            color: #00ff88;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.2rem;
+            background: linear-gradient(90deg, #ff3366, #ff00ff, #cc33ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            text-shadow: 0 0 25px rgba(255, 51, 102, 0.6);
+        }
+        .header p {
+            font-size: 1.4rem;
+            color: #ff99cc;
+            margin-top: 15px;
+        }
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
+        }
+        .resource-card {
+            background: rgba(15, 15, 30, 0.9);
+            border: 1px solid rgba(255, 51, 102, 0.4);
+            border-radius: 16px;
+            padding: 30px 25px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+        .resource-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff3366;
+            box-shadow: 0 20px 40px rgba(255, 51, 102, 0.3);
+        }
+        .resource-title {
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: #ff3366;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .resource-title i {
+            font-size: 1.5rem;
+        }
+        .watch-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            background: linear-gradient(45deg, #ff3366, #ff00ff);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .watch-btn:hover {
+            background: linear-gradient(45deg, #ff00ff, #cc33ff);
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(255, 51, 102, 0.5);
+        }
+        .app-link-card {
+            grid-column: 1 / -1;
+            background: rgba(30, 10, 40, 0.92);
+            border: 2px solid #ff00ff;
+            padding: 35px;
+            text-align: center;
+        }
+        .app-link-card .resource-title {
+            color: #ff99ff;
+            font-size: 2rem;
+        }
+        footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            color: #666;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(0,255,136,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🌐 Web Hacking Full Course</h1>
+        <p>ওয়েবসাইট হ্যাকিং + SQL Injection + XSS + আরো অনেক কিছু – সম্পূর্ণ কোর্স</p>
+    </div>
+
+    <!-- App Link (প্রথমে আলাদা বড় কার্ড) -->
+    <div class="app-link-card">
+        <div class="resource-title">
+            <i class="fas fa-mobile-alt"></i> App Link (প্রথমে এটা ডাউনলোড করো)
+        </div>
+        <a href="https://t.me/cybarghost/27" target="_blank" class="watch-btn" style="font-size: 1.3rem; padding: 18px;">
+            <i class="fab fa-telegram-plane"></i> App Link খুলো
+        </a>
+    </div>
+
+    <!-- Video Classes -->
+    <div class="resource-grid">
+        <div class="resource-card">
+            <div class="resource-title">
+                <i class="fas fa-play-circle"></i> First Video
+            </div>
+            <a href="https://t.me/cybarghost/29" target="_blank" class="watch-btn">
+                <i class="fab fa-telegram-plane"></i> Watch Video 1
+            </a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-title">
+                <i class="fas fa-play-circle"></i> Second Video
+            </div>
+            <a href="https://t.me/cybarghost/30" target="_blank" class="watch-btn">
+                <i class="fab fa-telegram-plane"></i> Watch Video 2
+            </a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-title">
+                <i class="fas fa-play-circle"></i> Third Video
+            </div>
+            <a href="https://t.me/cybarghost/31" target="_blank" class="watch-btn">
+                <i class="fab fa-telegram-plane"></i> Watch Video 3
+            </a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-title">
+                <i class="fas fa-play-circle"></i> Fourth Video
+            </div>
+            <a href="https://t.me/cybarghost/32" target="_blank" class="watch-btn">
+                <i class="fab fa-telegram-plane"></i> Watch Video 4
+            </a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-title">
+                <i class="fas fa-play-circle"></i> Fifth Video
+            </div>
+            <a href="https://t.me/cybarghost/33" target="_blank" class="watch-btn">
+                <i class="fab fa-telegram-plane"></i> Watch Video 5
+            </a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-title">
+                <i class="fas fa-play-circle"></i> Sixth Video
+            </div>
+            <a href="https://t.me/cybarghost/35" target="_blank" class="watch-btn">
+                <i class="fab fa-telegram-plane"></i> Watch Video 6
+            </a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-title">
+                <i class="fas fa-play-circle"></i> Last Video
+            </div>
+            <a href="https://t.me/cybarghost/36" target="_blank" class="watch-btn">
+                <i class="fab fa-telegram-plane"></i> Watch Last Video
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        BD Hackers Elite Arsenal v4.0 | All Courses Collected by RNASAKS | Educational Purpose Only
+    </footer>
+</div>
+
+</body>
+</html>

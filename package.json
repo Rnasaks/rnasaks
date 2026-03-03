@@ -1,0 +1,13 @@
+{
+  "name": "rnasaks2-local-server",
+  "version": "1.0.0",
+  "description": "Static site server with Telegram proxy for Rnasaks2",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.4.0"
+  }
+}

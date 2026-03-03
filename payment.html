@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD HACKERS ELITE - PREMIUM ACCESS v5.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Fira+Code:wght@400;500;700&display=swap');
+        
+        * {margin:0;padding:0;box-sizing:border-box;}
+        body {
+            font-family:'Roboto',sans-serif;
+            background:linear-gradient(135deg,#000000,#0f001a,#1a0033,#330066,#000428);
+            background-size:400% 400%;
+            animation:cyberGradient 18s ease infinite;
+            color:#00ffaa;
+            min-height:100vh;
+            overflow-y:auto;
+            position:relative;
+        }
+        
+        canvas#matrix-bg {
+            position:fixed;
+            top:0;
+            left:0;
+            z-index:0;
+            opacity:0.07;
+        }
+        
+        .dev-badge {
+            position:fixed;
+            top:18px;
+            right:18px;
+            background:linear-gradient(45deg,#ff00ff,#00ffaa,#00aaff);
+            color:#000;
+            padding:10px 22px;
+            border-radius:30px;
+            font-family:'Orbitron',monospace;
+            font-weight:900;
+            font-size:0.9em;
+            box-shadow:0 0 30px rgba(0,255,170,0.5);
+            z-index:1000;
+            animation:badgePulse 4s infinite alternate;
+        }
+        @keyframes badgePulse {
+            0%,100% { box-shadow:0 0 30px rgba(0,255,170,0.5); transform:scale(1); }
+            50% { box-shadow:0 0 45px rgba(0,255,170,0.8); transform:scale(1.04); }
+        }
+        
+        header {
+            background:rgba(0,0,0,0.88);
+            backdrop-filter:blur(25px);
+            padding:30px 0;
+            text-align:center;
+            border-bottom:2px solid rgba(0,255,170,0.3);
+            box-shadow:0 10px 50px rgba(0,255,170,0.15);
+        }
+        .logo-main {
+            font-family:'Orbitron',monospace;
+            font-size:3.2em;
+            font-weight:900;
+            background:linear-gradient(45deg,#00ffaa,#ff00ff,#00aaff,#ffff00);
+            background-size:400% 400%;
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            animation:eliteGradient 5s ease infinite;
+            text-shadow:0 0 50px rgba(0,255,170,0.7);
+        }
+        @keyframes eliteGradient {
+            0%,100% { background-position:0% 50%; }
+            25% { background-position:100% 0%; }
+            50% { background-position:100% 100%; }
+            75% { background-position:0% 100%; }
+        }
+        
+        .main-container {
+            max-width:580px;
+            margin:40px auto;
+            padding:0 20px;
+            position:relative;
+            z-index:10;
+        }
+        
+        .premium-card {
+            background:linear-gradient(145deg,rgba(10,10,40,0.96),rgba(30,0,70,0.94));
+            backdrop-filter:blur(28px);
+            border:2px solid rgba(0,255,170,0.35);
+            border-radius:28px;
+            padding:45px 35px;
+            box-shadow:0 30px 80px rgba(0,255,170,0.25),inset 0 2px 0 rgba(255,255,255,0.08);
+            position:relative;
+            overflow:hidden;
+        }
+        .premium-card::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:linear-gradient(45deg,rgba(0,255,170,0.08),rgba(255,0,255,0.06),transparent);
+            pointer-events:none;
+        }
+        
+        .price-box {
+            text-align:center;
+            margin:30px 0;
+        }
+        .price {
+            font-size:5.2rem;
+            font-weight:900;
+            background:linear-gradient(90deg,#00ffaa,#a5ffcc,#ffffaa);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            line-height:0.9;
+            font-family:'Orbitron';
+        }
+        .price small {
+            font-size:0.4em;
+            opacity:0.9;
+        }
+        
+        .payment-methods {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+            gap:18px;
+            margin:35px 0;
+        }
+        .method-card {
+            background:rgba(0,0,0,0.5);
+            border:1px solid rgba(0,255,170,0.3);
+            border-radius:16px;
+            padding:20px;
+            text-align:center;
+            transition:all 0.3s;
+        }
+        .method-card:hover {
+            transform:translateY(-6px);
+            border-color:#00ffaa;
+            box-shadow:0 15px 35px rgba(0,255,170,0.25);
+        }
+        .method-icon {
+            font-size:2.8rem;
+            margin-bottom:12px;
+        }
+        .method-number {
+            font-family:'Fira Code',monospace;
+            font-size:1.4rem;
+            font-weight:700;
+            color:#ffd700;
+            background:rgba(0,0,0,0.6);
+            padding:8px 16px;
+            border-radius:10px;
+            border:1px solid #ffd700;
+            margin-top:10px;
+            cursor:pointer;
+            user-select:all;
+        }
+        
+        .whatsapp-btn {
+            display:block;
+            width:100%;
+            padding:20px;
+            background:linear-gradient(45deg,#25D366,#128C7E,#075E54);
+            color:white;
+            font-size:1.3rem;
+            font-weight:900;
+            font-family:'Orbitron';
+            border-radius:16px;
+            text-decoration:none;
+            text-align:center;
+            margin:30px 0;
+            box-shadow:0 15px 40px rgba(37,211,102,0.4);
+            transition:all 0.4s;
+        }
+        .whatsapp-btn:hover {
+            transform:translateY(-4px) scale(1.02);
+            box-shadow:0 25px 60px rgba(37,211,102,0.6);
+        }
+        
+        .verify-box {
+            background:rgba(0,255,170,0.08);
+            border:2px solid rgba(0,255,170,0.4);
+            border-radius:20px;
+            padding:30px;
+            margin:30px 0;
+        }
+        .verify-title {
+            text-align:center;
+            font-size:1.6rem;
+            color:#00ffaa;
+            margin-bottom:20px;
+            font-family:'Orbitron';
+        }
+        .verify-input {
+            width:100%;
+            padding:16px;
+            margin:12px 0;
+            background:rgba(255,255,255,0.05);
+            border:2px solid #00ffaa;
+            border-radius:12px;
+            color:#fff;
+            font-family:'Fira Code',monospace;
+            font-size:1.1rem;
+        }
+        .verify-btn {
+            width:100%;
+            padding:18px;
+            background:linear-gradient(45deg,#ff00ff,#00ffaa,#00aaff);
+            color:#000;
+            font-size:1.3rem;
+            font-weight:900;
+            font-family:'Orbitron';
+            border:none;
+            border-radius:16px;
+            cursor:pointer;
+            margin-top:20px;
+            box-shadow:0 15px 40px rgba(0,255,170,0.4);
+            transition:all 0.4s;
+        }
+        .verify-btn:hover {
+            transform:translateY(-4px);
+            box-shadow:0 25px 60px rgba(0,255,170,0.6);
+        }
+        
+        .instruction {
+            background:rgba(255,215,0,0.1);
+            border-left:5px solid #ffd700;
+            padding:18px;
+            margin:25px 0;
+            border-radius:0 12px 12px 0;
+            color:#ffd700;
+            font-size:1.05rem;
+        }
+        
+        footer {
+            text-align:center;
+            padding:40px 20px;
+            color:#666;
+            font-size:0.95rem;
+            border-top:1px solid rgba(0,255,170,0.15);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrix-bg"></canvas>
+    
+    <div class="dev-badge">
+        <i class="fas fa-crown"></i> RNASAKS ELITE PAYMENT v5.0
+    </div>
+
+    <header>
+        <h1 class="logo-main">BD HACKERS ELITE</h1>
+        <p class="text-center text-pink-500 font-bold text-xl tracking-widest mt-3">
+            PREMIUM LIFETIME ACCESS • ৳৯৯৯
+        </p>
+    </header>
+
+    <div class="main-container">
+        <div class="premium-card">
+            <div class="price-box">
+                <div class="price">৳৯৯৯</div>
+                <p class="text-center text-gray-300 text-lg mt-2">One Time • Lifetime Access</p>
+            </div>
+
+            <div class="instruction">
+                <strong>পেমেন্ট করার নিয়ম:</strong><br>
+                উপরের যেকোনো নম্বরে ৯৯৯ টাকা Send Money করো (bKash/Nagad/Rocket)।<br>
+                <strong>Number এ Send Money করে নিচের Box এ Number আর Transaction ID দিয়ে Verify করেন।</strong>
+            </div>
+
+            <div class="payment-methods">
+                <div class="method-card">
+                    <div class="method-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <div class="method-number" onclick="copyToClipboard('01324220899')">01324220899</div>
+                    <div class="text-center text-sm mt-2 text-gray-400">bKash Personal</div>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon"><i class="fas fa-coins"></i></div>
+                    <div class="method-number" onclick="copyToClipboard('01324220899')">01324220899</div>
+                    <div class="text-center text-sm mt-2 text-gray-400">Nagad Personal</div>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon"><i class="fas fa-rocket"></i></div>
+                    <div class="method-number" onclick="copyToClipboard('01324220899')">01324220899</div>
+                    <div class="text-center text-sm mt-2 text-gray-400">Rocket Personal</div>
+                </div>
+            </div>
+
+            <a href="https://wa.me/8801828028316?text=🤑%20BD%20HACKERS%20ELITE%20Payment%0A%0AAmount%3A%20999%20TK%0APayment%20Number%3A%201828028316%0ATxID%3A%20[এখানে%20TxID%20লিখো]%0A%0APayment%20করেছি%2C%20verify%20করে%20দিন।" 
+               class="whatsapp-btn" target="_blank">
+                <i class="fab fa-whatsapp text-3xl"></i>
+                WHATSAPP এ Payment পাঠাও
+            </a>
+
+            <div class="verify-box">
+                <h3 class="verify-title">Payment Verify করো</h3>
+                <input type="text" id="phoneNumber" class="verify-input" placeholder="📱 তোমার নম্বর (017XXXXXXXX)" maxlength="11">
+                <input type="text" id="transactionId" class="verify-input" placeholder="🆔 Transaction ID (পুরোটা লিখো)">
+                <button id="verifyBtn" class="verify-btn">VERIFY & SEND TO ADMIN</button>
+            </div>
+
+            <p class="text-center text-sm text-gray-400 mt-6">
+                <a href="./index.html" class="text-cyan-400 hover:text-cyan-300 underline">
+                    Back to Tools & Courses List
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 RNASAKS • BD HACKERS ELITE • All Rights Reserved
+    </footer>
+
+    <script>
+        // Matrix rain background
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンハック';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0,0,0,0.04)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ffaa';
+            ctx.font = fontSize + 'px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 40);
+
+        // Copy to clipboard function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Number কপি হয়েছে: ' + text);
+            }).catch(() => {
+                alert('কপি করতে সমস্যা হয়েছে। ম্যানুয়ালি কপি করো।');
+            });
+        }
+
+        // WhatsApp verification button
+        document.getElementById('verifyBtn').addEventListener('click', function() {
+            const phone = document.getElementById('phoneNumber').value.trim();
+            const txId = document.getElementById('transactionId').value.trim();
+
+            if (!phone || phone.length !== 11 || !phone.startsWith('01')) {
+                alert('❌ সঠিক ১১ ডিজিটের নম্বর দাও (01XXXXXXXXX)');
+                return;
+            }
+
+            if (!txId || txId.length < 8) {
+                alert('❌ সঠিক Transaction ID দাও (কমপক্ষে ৮ অক্ষর)');
+                return;
+            }
+
+            const message = `🤑 BD HACKERS ELITE PAYMENT\n\n` +
+                           `Amount: ৳৯৯৯\n` +
+                           `Payer Number: ${phone}\n` +
+                           `Transaction ID: ${txId}\n\n` +
+                           `আমি পেমেন্ট করেছি! দয়া করে verify করে premium access দিন।`;
+
+            const whatsappUrl = `https://wa.me/8801828028316?text=${encodeURIComponent(message)}`;
+
+            window.open(whatsappUrl, '_blank');
+            alert('✅ WhatsApp খুলছে! মেসেজ পাঠিয়ে দাও – আমি চেক করে অ্যাক্সেস দিয়ে দিবো।');
+        });
+
+        // Responsive resize for matrix
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>

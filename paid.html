@@ -1,0 +1,875 @@
+        <!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD Hackers Elite Arsenal v4.0 - 30+ Pentest Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&family=Fira+Code:wght@400;500;700&display=swap');
+        
+        * {margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Roboto',sans-serif;background:linear-gradient(135deg,#0a0a23,#1a0a3a,#000428,#0a1a2e);background-size:400% 400%;animation:cyberGradient 20s ease infinite;color:#00ff88;overflow-x:hidden;position:relative;min-height:100vh;}
+        canvas#matrix-bg{position:fixed;top:0;left:0;z-index:-1;opacity:0.08;}
+        .dev-badge{position:fixed;top:20px;right:20px;background:linear-gradient(45deg,#ff00ff,#00ff88);color:#000;padding:10px 20px;border-radius:30px;font-family:'Orbitron',monospace;font-weight:700;font-size:0.9em;box-shadow:0 5px 20px rgba(255,0,255,0.4);z-index:1000;animation:badgeGlow 2s infinite alternate;}
+        @keyframes badgeGlow{0%{box-shadow:0 5px 20px rgba(255,0,255,0.4);}100%{box-shadow:0 5px 30px rgba(0,255,136,0.6);}}
+        header{background:rgba(0,0,0,0.92);backdrop-filter:blur(25px);padding:25px 0;text-align:center;box-shadow:0 10px 40px rgba(0,255,136,0.15);border-bottom:3px solid transparent;}
+        .logo-main{font-family:'Orbitron',monospace;font-size:3em;font-weight:900;background:linear-gradient(45deg,#00ff88,#ff00ff,#00ccff,#ffff00,#ff6600);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:eliteGradient 4s ease infinite;text-shadow:0 0 40px rgba(0,255,136,0.6);margin-bottom:15px;}
+        @keyframes eliteGradient{0%,100%{background-position:0% 50%;}25%{background-position:100% 0%;}50%{background-position:100% 100%;}75%{background-position:0% 100%;}}
+        .config-panel{max-width:1000px;margin:30px auto;background:rgba(0,0,0,0.7);border:2px solid #ff00ff;border-radius:20px;padding:25px;backdrop-filter:blur(10px);box-shadow:0 0 20px rgba(255,0,255,0.2);}
+        .config-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+        .config-input{background:rgba(255,255,255,0.05);border:1px solid #00ff88;border-radius:8px;padding:12px;color:#fff;font-family:'Fira Code',monospace;width:100%;}
+        .config-input:focus{outline:none;box-shadow:0 0 10px #00ff88;}
+        .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;padding:20px;max-width:1400px;margin:0 auto;}
+        .tool-card{background:rgba(15,15,30,0.95);backdrop-filter:blur(20px);border:1px solid rgba(0,255,136,0.25);border-radius:20px;padding:20px;transition:all 0.4s ease;position:relative;overflow:hidden;}
+        .tool-card:hover{transform:translateY(-8px);border-color:#00ff88;box-shadow:0 15px 40px rgba(0,255,136,0.4);}
+        .tool-icon{text-shadow:0 0 15px currentColor;}
+        .tool-btn{display:block;width:100%;padding:12px;background:linear-gradient(45deg,#00ff88,#00ccff);color:#000;text-align:center;text-decoration:none;border-radius:12px;font-weight:800;font-family:'Orbitron',monospace;margin-top:12px;cursor:pointer;border:none;transition:all 0.3s;}
+        .tool-btn:hover{background:linear-gradient(45deg,#ff00ff,#00ff88);transform:scale(1.02);}
+        .payload-output{margin-top:12px;background:#000;padding:12px;border-radius:8px;font-size:0.75em;word-break:break-all;display:none;border:1px dashed #ff00ff;}
+        .coming-soon{opacity:0.6;filter:grayscale(0.5);cursor:not-allowed;}
+        .coming-soon .tool-btn{background:linear-gradient(45deg,#666,#999)!important;color:#fff!important;}
+        @keyframes cyberGradient{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+        .stats-bar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.9);padding:15px 30px;border-radius:30px;border:2px solid #00ff88;display:flex;gap:30px;font-family:'Orbitron',monospace;font-size:0.9em;}
+
+        /* Improved Responsive Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .modal-content {
+            background: linear-gradient(145deg, rgba(20,20,60,0.98), rgba(40,0,80,0.96));
+            padding: 30px;
+            border: 3px solid #ff00ff;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(255,0,255,0.5);
+            animation: modalPop 0.4s ease-out;
+        }
+        @media (max-width: 480px) {
+            .modal-content {
+                padding: 20px;
+                margin: 20px;
+            }
+            .modal-title { font-size: 1.6rem; }
+            .modal-price { font-size: 2.5rem; }
+            .modal-btn { padding: 12px 30px; font-size: 1.1rem; }
+        }
+        @keyframes modalPop {
+            from {transform: scale(0.7) translateY(20px); opacity: 0;}
+            to {transform: scale(1) translateY(0); opacity: 1;}
+        }
+        .modal-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.2rem;
+            background: linear-gradient(45deg, #ff00ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        .modal-price {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #00ff88;
+            margin: 20px 0;
+        }
+        .modal-btn {
+            padding: 15px 40px;
+            margin: 12px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .buy-btn {
+            background: linear-gradient(45deg, #ff00ff, #00ff88);
+            color: #000;
+            border: none;
+        }
+        .buy-btn:hover { transform: scale(1.08); box-shadow: 0 0 30px rgba(0,255,136,0.6); }
+        .close-btn {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid #ff3366;
+        }
+        .close-btn:hover { background: rgba(255,51,102,0.3); }
+
+    </style>
+</head>
+<body>
+    <canvas id="matrix-bg"></canvas>
+    
+    <div class="dev-badge">
+        <i class="fas fa-crown"></i> DEVELOPED BY RNASAKS v4.0 | 35+ TOOLS
+    </div>
+
+    <header>
+        <h1 class="logo-main">BD HACKERS</h1>
+        <p class="text-pink-500 font-bold tracking-widest text-lg">PROFESSIONAL PENTEST ARSENAL | AUTHORIZED TESTING</p>
+    </header>
+
+    <!-- Unlock Banner -->
+    <div class="text-center my-8">
+        <a href="./payment.html" class="inline-block px-12 py-6 bg-gradient-to-r from-purple-700 via-pink-600 to-purple-700 hover:from-pink-600 hover:to-purple-600 text-white font-bold text-2xl rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
+            <i class="fas fa-crown mr-3 text-3xl"></i> UNLOCK ALL (৳৯৯৯ Lifetime)
+        </a>
+    </div>
+
+    <!-- Demo Mode Config -->
+    <div class="config-panel">
+        <h3 class="font-orbitron text-white mb-4 text-center text-xl">
+            <i class="fas fa-university mr-2"></i> DEMO CONFIGURATION (NO EXFILTRATION)
+        </h3>
+        <div class="config-grid">
+            <div>
+                <label class="block text-xs text-green-400 mb-1">🔒 Demo Token (Not used)</label>
+                <input type="text" id="globalBotToken" class="config-input" placeholder="Demo value (disabled)" disabled>
+            </div>
+            <div>
+                <label class="block text-xs text-green-400 mb-1">🔒 Demo Chat ID (Not used)</label>
+                <input type="text" id="globalChatId" class="config-input" placeholder="Demo value (disabled)" disabled>
+            </div>
+        </div>
+        <div class="mt-3 text-center">
+            <button id="enableSendBtn" class="inline-block px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded mr-2 text-sm">Enable Test Sending</button>
+            <button id="disableSendBtn" class="inline-block px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded mr-2 text-sm">Disable Sending</button>
+            <span id="sendStatus" class="text-xs text-yellow-300/80 ml-2">TEST SENDING: DISABLED</span>
+            <p class="text-xs text-yellow-300/80 mt-3">Note: Sending is disabled by default; enable only for private testing (not recommended on public hosting).</p>
+        </div>
+                <label class="block text-xs text-green-400 mb-1">💬 TELEGRAM CHAT ID</label>
+                <input type="text" id="globalChatId" class="config-input" placeholder="123456789">
+            </div>
+        </div>
+    </div>
+
+    <!-- Join Channels -->
+    <div class="config-panel mt-6">
+        <h3 class="font-orbitron text-white mb-4 text-center text-xl">
+            <i class="fas fa-broadcast-tower mr-2 text-cyan-400"></i> JOIN OUR CHANNELS
+        </h3>
+        <div class="config-grid gap-6">
+            <!-- Public Channel (ফ্রি) -->
+            <div class="bg-gradient-to-br from-cyan-900/30 to-teal-900/20 border border-cyan-500/40 rounded-xl p-6 backdrop-blur-lg">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center">
+                        <i class="fab fa-telegram-plane text-3xl text-cyan-400 mr-3"></i>
+                        <h4 class="text-lg font-orbitron text-cyan-300">Public Channel</h4>
+                    </div>
+                    <span class="bg-cyan-600/40 text-cyan-200 text-xs px-3 py-1 rounded-full">Open</span>
+                </div>
+                <p class="text-sm text-cyan-200/90 mb-5">সব আপডেট, টুলস, কোর্স লিঙ্ক এখানে পাবে।</p>
+                <a href="https://t.me/cybarghost" target="_blank" class="block w-full text-center py-4 bg-gradient-to-r from-cyan-600 to-teal-600 text-white font-bold rounded-xl transition-all hover:shadow-cyan-500/40">
+                    <i class="fas fa-sign-in-alt mr-2"></i> JOIN PUBLIC CHANNEL
+                </a>
+            </div>
+
+            <!-- Private Channel (Paid Only) -->
+            <div class="bg-gradient-to-br from-purple-900/30 to-pink-900/20 border border-purple-500/40 rounded-xl p-6 backdrop-blur-lg relative overflow-hidden">
+                <div class="absolute top-3 right-3">
+                    <span class="bg-red-600/80 text-white text-xs px-4 py-1.5 rounded-full flex items-center shadow-md">
+                        <i class="fas fa-lock mr-1.5"></i> PAID ONLY
+                    </span>
+                </div>
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-crown text-3xl text-yellow-400 mr-3"></i>
+                    <h4 class="text-lg font-orbitron text-purple-300">Private Elite Channel</h4>
+                </div>
+                <p class="text-sm text-purple-200/90 mb-3">শুধুমাত্র পেইড ইউজারদের জন্য</p>
+                <p class="text-xs text-purple-300/80 mb-6">পেমেন্ট করলে ইনভাইট লিঙ্ক পাবে</p>
+                <a href="" class="block w-full text-center py-4 bg-gradient-to-r from-purple-700 to-pink-700 opacity-70 cursor-not-allowed text-white font-bold rounded-xl">
+                    <i class="fas fa-lock mr-2"></i> PRIVATE CHANNEL (Paid Only)
+                </a>
+                <p class="text-center text-xs text-yellow-400 mt-4 italic">
+                    পেমেন্ট করে DM করো @RnaSaks00
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="tools-grid">
+            <!-- CORE TOOLS (সব লকড) -->
+            <div class="tool-card locked-tool">
+                <div class="flex justify-between items-start mb-3">
+                    <i class="fas fa-map-marker-alt text-3xl text-green-400 tool-icon"></i>
+                    <span class="bg-green-600/30 text-green-400 text-xs px-2 py-1 rounded-full font-bold">GPS TRACKING</span>
+                </div>
+                <h3 class="text-lg font-orbitron text-white mb-2">Location Intel Pro</h3>
+                <p class="text-xs text-green-200/80 mb-3">Real-time GPS + IP via FB Followers bait</p>
+                <button class="tool-btn"><i class="fas fa-rocket mr-2"></i>DEPLOY TRACKER</button>
+            </div>
+
+             <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-video text-3xl text-pink-400 tool-icon"></i>
+                <span class="bg-pink-600/30 text-pink-400 text-xs px-2 py-1 rounded-full font-bold">CAMERA RCE</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Remote Cam Suite</h3>
+            <p class="text-xs text-green-200/80 mb-3">WebRTC hijack + photo capture</p>
+            <button onclick="generatePayload('camera')" class="tool-btn"><i class="fas fa-play mr-2"></i>STREAM ACCESS</button>
+            <div id="output-camera" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-keyboard text-3xl text-blue-400 tool-icon"></i>
+                <span class="bg-blue-600/30 text-blue-400 text-xs px-2 py-1 rounded-full font-bold">KEYLOGGER</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Kernel Keylogger</h3>
+            <p class="text-xs text-green-200/80 mb-3">Keystroke + clipboard capture</p>
+            <button onclick="generatePayload('keylogger')" class="tool-btn"><i class="fas fa-download mr-2"></i>DEPLOY LOG</button>
+            <div id="output-keylogger" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-sms text-3xl text-orange-400 tool-icon"></i>
+                <span class="bg-orange-600/30 text-orange-400 text-xs px-2 py-1 rounded-full font-bold">SMS FLOOD</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">SMS Artillery</h3>
+            <p class="text-xs text-green-200/80 mb-3">Multi-SIM flood attack</p>
+            <button onclick="generatePayload('sms')" class="tool-btn"><i class="fas fa-bomb mr-2"></i>LAUNCH FLOOD</button>
+            <div id="output-sms" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-mobile-alt text-3xl text-yellow-400 tool-icon"></i>
+                <span class="bg-yellow-600/30 text-yellow-400 text-xs px-2 py-1 rounded-full font-bold">DEVICE RECON</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Mobile Intel Pro</h3>
+            <p class="text-xs text-green-200/80 mb-3">Full device fingerprinting</p>
+            <button onclick="generatePayload('device')" class="tool-btn"><i class="fas fa-search mr-2"></i>ENUMERATE DEVICE</button>
+            <div id="output-device" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-at text-3xl text-red-400 tool-icon"></i>
+                <span class="bg-red-600/30 text-red-400 text-xs px-2 py-1 rounded-full font-bold">GMAIL PHISH</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Gmail Breach Kit</h3>
+            <p class="text-xs text-green-200/80 mb-3">2FA bypass phishing</p>
+            <button onclick="generatePayload('gmail')" class="tool-btn"><i class="fas fa-fish mr-2"></i>DEPLOY PHISH</button>
+            <div id="output-gmail" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fab fa-facebook text-3xl text-blue-500 tool-icon"></i>
+                <span class="bg-blue-600/30 text-blue-500 text-xs px-2 py-1 rounded-full font-bold">FB EXPLOIT</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Facebook RCE</h3>
+            <p class="text-xs text-green-200/80 mb-3">Profile + followers grabber</p>
+            <button onclick="generatePayload('facebook')" class="tool-btn"><i class="fas fa-users mr-2"></i>FOLLOWERS GRAB</button>
+            <div id="output-facebook" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fab fa-instagram text-3xl text-pink-500 tool-icon"></i>
+                <span class="bg-pink-600/30 text-pink-500 text-xs px-2 py-1 rounded-full font-bold">INSTA PHISH</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Insta Takeover</h3>
+            <p class="text-xs text-green-200/80 mb-3">Account credentials phish</p>
+            <button onclick="generatePayload('instagram')" class="tool-btn"><i class="fas fa-users mr-2"></i>HACK PROFILE</button>
+            <div id="output-instagram" class="payload-output"></div>
+        </div>
+
+        <!-- WHATSAPP + TELEGRAM -->
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fab fa-whatsapp text-3xl text-green-600 tool-icon"></i>
+                <span class="bg-green-600/30 text-green-600 text-xs px-2 py-1 rounded-full font-bold">WHATSAPP PHISH</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">WhatsApp Phish</h3>
+            <p class="text-xs text-green-200/80 mb-3">OTP verification bypass</p>
+            <button onclick="generatePayload('whatsapp')" class="tool-btn"><i class="fas fa-phone mr-2"></i>PHISH OTP</button>
+            <div id="output-whatsapp" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fab fa-tiktok text-3xl text-black tool-icon" style="color: #ff0050;"></i>
+                <span class="bg-black/30 text-white text-xs px-2 py-1 rounded-full font-bold">TIKTOK PHISH</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">TikTok Verified Badge</h3>
+            <p class="text-xs text-green-200/80 mb-3">Get verified badge + followers phishing</p>
+            <button onclick="generatePayload('tiktok')" class="tool-btn"><i class="fas fa-trophy mr-2"></i>DEPLOY PHISH</button>
+            <div id="output-tiktok" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-video text-3xl text-cyan-400 tool-icon"></i>
+                <span class="bg-cyan-600/30 text-cyan-400 text-xs px-2 py-1 rounded-full font-bold">IMO PHISH</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">IMO Video Call Phish</h3>
+            <p class="text-xs text-green-200/80 mb-3">Free video call credits + OTP bypass</p>
+            <button onclick="generatePayload('imo')" class="tool-btn"><i class="fas fa-video mr-2"></i>LAUNCH PHISH</button>
+            <div id="output-imo" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fab fa-telegram text-3xl text-blue-500 tool-icon"></i>
+                <span class="bg-blue-600/30 text-blue-500 text-xs px-2 py-1 rounded-full font-bold">TELEGRAM PHISH</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Telegram Phish</h3>
+            <p class="text-xs text-green-200/80 mb-3">Session hijacking</p>
+            <button onclick="generatePayload('telegram')" class="tool-btn"><i class="fas fa-paper-plane mr-2"></i>SESSION GRAB</button>
+            <div id="output-telegram" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-phone-volume text-3xl text-purple-400 tool-icon"></i>
+                <span class="bg-purple-600/30 text-purple-400 text-xs px-2 py-1 rounded-full font-bold">PHONE LOOKUP</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Advanced Number Lookup</h3>
+            <p class="text-xs text-green-200/80 mb-3">Carrier • Location • Owner intel grabber</p>
+            <button onclick="generatePayload('phonelookup')" class="tool-btn"><i class="fas fa-search mr-2"></i>START LOOKUP</button>
+            <div id="output-phonelookup" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-certificate text-3xl text-yellow-400 tool-icon"></i>
+                <span class="bg-yellow-600/30 text-yellow-400 text-xs px-2 py-1 rounded-full font-bold">CERT FAKE</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Digital Certificate Generator</h3>
+            <p class="text-xs text-green-200/80 mb-3">Fake SSL / Verified badge proof maker</p>
+            <button onclick="generatePayload('certificate')" class="tool-btn"><i class="fas fa-shield-alt mr-2"></i>GENERATE CERT</button>
+            <div id="output-certificate" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-gamepad text-3xl text-violet-500 tool-icon"></i>
+                <span class="bg-violet-600/30 text-violet-500 text-xs px-2 py-1 rounded-full font-bold">GAME HACK</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Free Fire Premium</h3>
+            <p class="text-xs text-green-200/80 mb-3">Diamond generator bypass</p>
+            <button onclick="generatePayload('freefire')" class="tool-btn"><i class="fas fa-diamond mr-2"></i>GENERATE</button>
+            <div id="output-freefire" class="payload-output"></div>
+        </div>
+
+        <!-- BANKING TOOLS -->
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-file-invoice-dollar text-3xl text-green-500 tool-icon"></i>
+                <span class="bg-green-600/30 text-green-500 text-xs px-2 py-1 rounded-full font-bold">BKASH PROOF</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">bKash Screenshot Pro</h3>
+            <p class="text-xs text-green-200/80 mb-3">Transaction proof generator</p>
+            <button onclick="generatePayload('bkash')" class="tool-btn"><i class="fas fa-image mr-2"></i>GENERATE PROOF</button>
+            <div id="output-bkash" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-wallet text-3xl text-purple-500 tool-icon"></i>
+                <span class="bg-purple-600/30 text-purple-500 text-xs px-2 py-1 rounded-full font-bold">NAGAD PROOF</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Nagad Proof Elite</h3>
+            <p class="text-xs text-green-200/80 mb-3">Dynamic transaction templates</p>
+            <button onclick="generatePayload('nagad')" class="tool-btn"><i class="fas fa-coins mr-2"></i>CREATE SS</button>
+            <div id="output-nagad" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-globe text-3xl text-cyan-400 tool-icon"></i>
+                <span class="bg-cyan-600/30 text-cyan-400 text-xs px-2 py-1 rounded-full font-bold">DDOS</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">DDoS Suite</h3>
+            <p class="text-xs text-green-200/80 mb-3">Layer7 stresser</p>
+            <button onclick="generatePayload('ddos')" class="tool-btn"><i class="fas fa-bolt mr-2"></i>STRESS TEST</button>
+            <div id="output-ddos" class="payload-output"></div>
+        </div>
+
+        <!-- FORMER "COMING SOON" TOOLS — এখন নরমাল -->
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-wifi text-3xl text-indigo-400 tool-icon"></i>
+                <span class="bg-indigo-600/30 text-indigo-400 text-xs px-2 py-1 rounded-full font-bold">WIFI ATTACK</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">WiFi Pineapple Pro</h3>
+            <p class="text-xs text-green-200/80 mb-3">Rogue AP + captive portal</p>
+            <button onclick="generatePayload('wifi')" class="tool-btn"><i class="fas fa-signal mr-2"></i>SCAN NETWORKS</button>
+            <div id="output-wifi" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-database text-3xl text-teal-400 tool-icon"></i>
+                <span class="bg-teal-600/30 text-teal-400 text-xs px-2 py-1 rounded-full font-bold">SQL INJECTION</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">SQLMap Enterprise</h3>
+            <p class="text-xs text-green-200/80 mb-3">Blind SQL injection</p>
+            <button onclick="generatePayload('sql')" class="tool-btn"><i class="fas fa-bug mr-2"></i>EXPLOIT DB</button>
+            <div id="output-sql" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-key text-3xl text-amber-500 tool-icon"></i>
+                <span class="bg-amber-600/30 text-amber-500 text-xs px-2 py-1 rounded-full font-bold">HASH CRACK</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Hashcat GPU</h3>
+            <p class="text-xs text-green-200/80 mb-3">Password cracking cluster</p>
+            <button onclick="generatePayload('hashcat')" class="tool-btn"><i class="fas fa-fire mr-2"></i>CRACK HASHES</button>
+            <div id="output-hashcat" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-exchange-alt text-3xl text-lime-500 tool-icon"></i>
+                <span class="bg-lime-600/30 text-lime-500 text-xs px-2 py-1 rounded-full font-bold">MITM</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">MITM Proxy Elite</h3>
+            <p class="text-xs text-green-200/80 mb-3">SSL stripping framework</p>
+            <button onclick="generatePayload('mitm')" class="tool-btn"><i class="fas fa-route mr-2"></i>INTERCEPT</button>
+            <div id="output-mitm" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-shield-alt text-3xl text-gray-400 tool-icon"></i>
+                <span class="bg-gray-600/30 text-gray-400 text-xs px-2 py-1 rounded-full font-bold">EVADE</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">AV Evasion</h3>
+            <p class="text-xs text-green-200/80 mb-3">Polymorphic payloads</p>
+            <button onclick="generatePayload('stealth')" class="tool-btn"><i class="fas fa-ghost mr-2"></i>GENERATE</button>
+            <div id="output-stealth" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-user-secret text-3xl text-purple-400 tool-icon"></i>
+                <span class="bg-purple-600/30 text-purple-400 text-xs px-2 py-1 rounded-full font-bold">OSINT</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">OSINT Pro</h3>
+            <p class="text-xs text-green-200/80 mb-3">Social media recon</p>
+            <button onclick="generatePayload('osint')" class="tool-btn"><i class="fas fa-search mr-2"></i>RECON TARGET</button>
+            <div id="output-osint" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-network-wired text-3xl text-emerald-500 tool-icon"></i>
+                <span class="bg-emerald-600/30 text-emerald-500 text-xs px-2 py-1 rounded-full font-bold">PORT SCAN</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Nmap Enterprise</h3>
+            <p class="text-xs text-green-200/80 mb-3">Advanced port scanning</p>
+            <button onclick="generatePayload('nmap')" class="tool-btn"><i class="fas fa-network-wired mr-2"></i>PORT SCAN</button>
+            <div id="output-nmap" class="payload-output"></div>
+        </div>
+
+
+            <!-- COURSE SECTION HEADER -->
+            <div class="col-span-full my-8 py-4 border-t-2 border-b-2 border-green-500/40 bg-black/30 rounded-xl text-center">
+                <h2 class="text-2xl md:text-3xl font-orbitron font-black bg-gradient-to-r from-green-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                    <i class="fas fa-graduation-cap mr-3 text-yellow-400"></i>
+                    FULL COURSE BAIT TOOLS
+                </h2>
+                <p class="text-sm text-green-300/70 mt-2">All courses are premium (Paid Access Only)</p>
+            </div>
+
+            <!-- সব কোর্সও locked-tool ক্লাস দিয়ে -->
+            <div class="tool-card locked-tool">
+                <div class="flex justify-between items-start mb-3">
+                    <i class="fas fa-shield-alt text-3xl text-red-500 tool-icon"></i>
+                    <span class="bg-red-600/30 text-red-500 text-xs px-2 py-1 rounded-full font-bold">CYBER SEC</span>
+                </div>
+                <h3 class="text-lg font-orbitron text-white mb-2">Full Cyber Security Course</h3>
+                <p class="text-xs text-green-200/80 mb-3">Complete ethical hacking & security course bait</p>
+                <button class="tool-btn"><i class="fas fa-book mr-2"></i>ENROLL FREE</button>
+            </div>
+
+           <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+               <i class="fas fa-user-graduate text-3xl text-cyan-400 tool-icon"></i>
+               <span class="bg-cyan-600/30 text-cyan-400 text-xs px-2 py-1 rounded-full font-bold">CEH BANGLA</span>
+           </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Ethical Hacking Masterclass Bn</h3>
+            <p class="text-xs text-green-200/80 mb-3">Certified Ethical Hacking</p>
+            <button onclick="generatePayload('cehbangla')" class="tool-btn"><i class="fas fa-certificate mr-2"></i>ENROLL FREE NOW</button>
+            <div id="output-cehbangla" class="payload-output"></div>
+       </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-terminal text-3xl text-green-400 tool-icon"></i>
+                <span class="bg-green-600/30 text-green-400 text-xs px-2 py-1 rounded-full font-bold">TERMUX</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Termux Full Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">Termux hacking tools & scripts full guide</p>
+            <button onclick="generatePayload('termux')" class="tool-btn"><i class="fas fa-code mr-2"></i>START COURSE</button>
+            <div id="output-termux" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-wifi text-3xl text-indigo-400 tool-icon"></i>
+                <span class="bg-indigo-600/30 text-indigo-400 text-xs px-2 py-1 rounded-full font-bold">WIFI HACK</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">WiFi Hacking Full Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">WiFi cracking & security course bait</p>
+            <button onclick="generatePayload('wifihack')" class="tool-btn"><i class="fas fa-signal mr-2"></i>LEARN NOW</button>
+            <div id="output-wifihack" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-skull-crossbones text-3xl text-orange-500 tool-icon"></i>
+                <span class="bg-orange-600/30 text-orange-500 text-xs px-2 py-1 rounded-full font-bold">ETHICAL HACK</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Ethical Hacking Full Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">From zero to pro ethical hacking guide</p>
+            <button onclick="generatePayload('ethicalhack')" class="tool-btn"><i class="fas fa-user-secret mr-2"></i>ENROLL</button>
+            <div id="output-ethicalhack" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-linux text-3xl text-cyan-400 tool-icon"></i>
+                <span class="bg-cyan-600/30 text-cyan-400 text-xs px-2 py-1 rounded-full font-bold">KALI LINUX</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Kali Linux Full Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">Kali tools & penetration testing course</p>
+            <button onclick="generatePayload('kalilinux')" class="tool-btn"><i class="fas fa-terminal mr-2"></i>START LEARNING</button>
+            <div id="output-kalilinux" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fab fa-python text-3xl text-yellow-400 tool-icon"></i>
+                <span class="bg-yellow-600/30 text-yellow-400 text-xs px-2 py-1 rounded-full font-bold">PYTHON HACK</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Python for Hacking Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">Scripting & automation for hackers</p>
+            <button onclick="generatePayload('pythonhack')" class="tool-btn"><i class="fas fa-code mr-2"></i>ENROLL FREE</button>
+            <div id="output-pythonhack" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-globe text-3xl text-purple-500 tool-icon"></i>
+                <span class="bg-purple-600/30 text-purple-500 text-xs px-2 py-1 rounded-full font-bold">WEB HACK</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Web Hacking Full Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">SQLi, XSS, CSRF & web pentest course</p>
+            <button onclick="generatePayload('webhack')" class="tool-btn"><i class="fas fa-bug mr-2"></i>LEARN NOW</button>
+            <div id="output-webhack" class="payload-output"></div>
+        </div>
+
+                <!-- Network Security Course (কমেন্ট করা আছে, এখন দেখা যাবে না) -->
+        <!--
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-network-wired text-3xl text-teal-400 tool-icon"></i>
+                <span class="bg-teal-600/30 text-teal-400 text-xs px-2 py-1 rounded-full font-bold">NETWORK SEC</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Network Security Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">Firewalls, VPN, MITM full guide</p>
+            <button onclick="generatePayload('networksec')" class="tool-btn"><i class="fas fa-shield-alt mr-2"></i>ENROLL</button>
+            <div id="output-networksec" class="payload-output"></div>
+        </div>
+        -->
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-mobile-alt text-3xl text-pink-500 tool-icon"></i>
+                <span class="bg-pink-600/30 text-pink-500 text-xs px-2 py-1 rounded-full font-bold">MOBILE HACK</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Mobile Hacking Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">Android/iOS pentest & exploits course</p>
+            <button onclick="generatePayload('mobilehack')" class="tool-btn"><i class="fas fa-mobile mr-2"></i>START COURSE</button>
+            <div id="output-mobilehack" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-bug text-3xl text-amber-500 tool-icon"></i>
+                <span class="bg-amber-600/30 text-amber-500 text-xs px-2 py-1 rounded-full font-bold">BUG BOUNTY</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Bug Bounty Full Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">Find bugs & earn money course bait</p>
+            <button onclick="generatePayload('bugbounty')" class="tool-btn"><i class="fas fa-dollar-sign mr-2"></i>LEARN & EARN</button>
+            <div id="output-bugbounty" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-cloud text-3xl text-indigo-400 tool-icon"></i>
+                <span class="bg-indigo-600/30 text-indigo-400 text-xs px-2 py-1 rounded-full font-bold">CLOUD SECURITY</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Cloud Security Certification</h3>
+            <p class="text-xs text-green-200/80 mb-3">AWS / Azure / GCP Cloud Security Professional কোর্স – ফ্রি সার্টিফিকেট</p>
+            <button onclick="generatePayload('cloudsecurity')" class="tool-btn"><i class="fas fa-cloud-upload-alt mr-2"></i>GET CERTIFIED FREE</button>
+            <div id="output-cloudsecurity" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-network-wired text-3xl text-blue-500 tool-icon"></i>
+                <span class="bg-blue-600/30 text-blue-500 text-xs px-2 py-1 rounded-full font-bold">CISCO CYBEROPS</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Cisco Certified CyberOps Associate</h3>
+            <p class="text-xs text-green-200/80 mb-3">সার্টিফাইড সাইবার অপারেশনস কোর্স – ফ্রি এনরোলমেন্ট + সার্টিফিকেট</p>
+            <button onclick="generatePayload('ciscocyberops')" class="tool-btn"><i class="fas fa-shield-alt mr-2"></i>ENROLL FREE NOW</button>
+            <div id="output-ciscocyberops" class="payload-output"></div>
+        </div>
+        <!-- Completed Cyber Security Full Course -->
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-check-circle text-3xl text-green-500 tool-icon"></i>
+                <span class="bg-green-600/30 text-green-500 text-xs px-2 py-1 rounded-full font-bold">COMPLETED CYBER</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Completed Cyber Security Full Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">পুরো সাইবার সিকিউরিটি কোর্স + সার্টিফিকেট – ফ্রি এনরোল</p>
+            <button onclick="generatePayload('completedcyber')" class="tool-btn"><i class="fas fa-check-double mr-2"></i>COMPLETE NOW</button>
+            <div id="output-completedcyber" class="payload-output"></div>
+        </div>
+
+        <!-- Dark Web Full Course -->
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-skull text-3xl text-gray-400 tool-icon"></i>
+                <span class="bg-gray-700/50 text-gray-300 text-xs px-2 py-1 rounded-full font-bold">DARK WEB</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Dark Web Full Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">ডার্ক ওয়েব অ্যাক্সেস, টুলস ও সিকিউরিটি – ফ্রি গাইড</p>
+            <button onclick="generatePayload('darkweb')" class="tool-btn"><i class="fas fa-globe mr-2"></i>ACCESS DARK WEB</button>
+            <div id="output-darkweb" class="payload-output"></div>
+        </div>
+        <!-- Facebook Hacking Full Course -->
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fab fa-facebook text-3xl text-blue-600 tool-icon"></i>
+                <span class="bg-blue-700/40 text-blue-400 text-xs px-2 py-1 rounded-full font-bold">FB HACKING</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Facebook Hacking Full Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">ফেসবুক অ্যাকাউন্ট হ্যাকিং + রিকভারি + সিকিউরিটি ফুল কোর্স</p>
+            <button onclick="generatePayload('fbhacking')" class="tool-btn"><i class="fas fa-users mr-2"></i>FB HACK COURSE</button>
+            <div id="output-fbhacking" class="payload-output"></div>
+        </div>
+        <!-- 18+ All Premium Courses -->
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-lock-open text-3xl text-pink-500 tool-icon"></i>
+                <span class="bg-pink-600/30 text-pink-500 text-xs px-2 py-1 rounded-full font-bold">18+ PREMIUM</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">18+ All Premium Courses</h3>
+            <p class="text-xs text-green-200/80 mb-3">সব প্রিমিয়াম ১৮+ কোর্স আনলক – ফ্রি অ্যাক্সেস</p>
+            <button onclick="generatePayload('premium18')" class="tool-btn"><i class="fas fa-unlock-alt mr-2"></i>UNLOCK ALL</button>
+            <div id="output-premium18" class="payload-output"></div>
+        </div>
+
+        <!-- Advanced RAT Course -->
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-spider text-3xl text-red-600 tool-icon"></i>
+                <span class="bg-red-700/40 text-red-400 text-xs px-2 py-1 rounded-full font-bold">ADV RAT</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Advanced RAT Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">এডভান্সড রিমোট অ্যাক্সেস ট্রোজান তৈরি ও ব্যবহার কোর্স</p>
+            <button onclick="generatePayload('advrat')" class="tool-btn"><i class="fas fa-bug mr-2"></i>LEARN ADV RAT</button>
+            <div id="output-advrat" class="payload-output"></div>
+        </div>
+        
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fab fa-android text-3xl text-green-500 tool-icon"></i>
+                <span class="bg-green-600/30 text-green-500 text-xs px-2 py-1 rounded-full font-bold">ANDROID DEV</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">Android App Development Full Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">Android Studio + Kotlin + Java</p>
+            <button onclick="generatePayload('androiddev')" class="tool-btn"><i class="fab fa-android mr-2"></i>ANDROID COURSE</button>
+            <div id="output-androiddev" class="payload-output"></div>
+        </div>
+
+        <!-- SQLi & Website Hacking Course -->
+        <div class="tool-card">
+            <div class="flex justify-between items-start mb-3">
+                <i class="fas fa-database text-3xl text-teal-400 tool-icon"></i>
+                <span class="bg-teal-600/30 text-teal-400 text-xs px-2 py-1 rounded-full font-bold">SQLi HACK</span>
+            </div>
+            <h3 class="text-lg font-orbitron text-white mb-2">SQLi / Website Hack Course</h3>
+            <p class="text-xs text-green-200/80 mb-3">ওয়েবসাইট হ্যাকিং + SQL Injection ফুল কোর্স</p>
+            <button onclick="generatePayload('sqliwebsite')" class="tool-btn"><i class="fas fa-bolt mr-2"></i>HACK WEBSITES</button>
+            <div id="output-sqliwebsite" class="payload-output"></div>
+        </div>
+
+        </div>
+    </main>
+
+    <!-- Payment Popup Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">PREMIUM ACCESS REQUIRED</h2>
+            <p class="text-xl text-white mb-6">সব টুলস এবং কোর্স আনলক করতে লাগবে</p>
+            <div class="modal-price">৳৯৯৯ <small>Lifetime</small></div>
+            <p class="text-lg text-gray-300 mb-8">One Time Payment • সম্পূর্ণ অ্যাক্সেস + প্রাইভেট চ্যানেল</p>
+            
+            <button onclick="window.location.href='./payment.html'" class="modal-btn buy-btn">
+                <i class="fas fa-shopping-cart mr-2"></i> BUY NOW (৳৯৯৯)
+            </button>
+            <button onclick="document.getElementById('paymentModal').style.display='none'" class="modal-btn close-btn">
+                <i class="fas fa-times mr-2"></i> CLOSE
+            </button>
+        </div>
+    </div>
+
+     <!-- Elite Footer - RNASAKS Edition -->
+<footer class="w-full bg-gradient-to-r from-black via-purple-900/50 to-black backdrop-blur-xl border-t border-green-500/30 mt-12 pt-8 pb-6">
+    <div class="max-w-7xl mx-auto px-6">
+        <!-- Main Footer Content -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            
+            <!-- RNASAKS Branding -->
+            <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start mb-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-400 via-pink-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-green-500/30 mr-3">
+                        <i class="fas fa-crown text-2xl text-black font-bold"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-orbitron text-2xl font-black bg-gradient-to-r from-green-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+                            RNASAKS
+                        </h3>
+                        <p class="text-xs text-green-400/80 font-mono tracking-wider uppercase">Elite Arsenal v4.0</p>
+                    </div>
+                </div>
+                <p class="text-green-300/70 text-sm leading-relaxed">
+                    Authorized penetration testing framework for cybersecurity professionals.
+                </p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div>
+                <h4 class="font-orbitron text-lg text-white mb-6 flex items-center">
+                    <i class="fas fa-chart-line text-green-400 mr-2"></i> Elite Stats
+                </h4>
+                <div class="space-y-3">
+                    <div class="flex items-center text-sm">
+                        <i class="fas fa-tools text-green-400 mr-2 w-5"></i>
+                        <span>35+ Pentest Tools</span>
+                    </div>
+                    <div class="flex items-center text-sm">
+                        <i class="fas fa-shield-alt text-pink-400 mr-2 w-5"></i>
+                        <span>AV Evasion Active</span>
+                    </div>
+                    <div class="flex items-center text-sm">
+                        <i class="fas fa-lock text-blue-400 mr-2 w-5"></i>
+                        <span>HTTPS Secure</span>
+                    </div>
+                    <div class="flex items-center text-sm">
+                        <i class="fas fa-bolt text-yellow-400 mr-2 w-5"></i>
+                        <span>Real-time C2</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- C2 Status -->
+            <div>
+                <h4 class="font-orbitron text-lg text-white mb-6 flex items-center">
+                    <i class="fas fa-server text-purple-400 mr-2"></i> C2 Status
+                </h4>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between text-sm p-2 bg-black/30 rounded-lg">
+                        <span>Bot Token</span>
+                        <span class="text-green-400 font-mono text-xs">✅ Configured</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm p-2 bg-black/30 rounded-lg">
+                        <span>Chat ID</span>
+                        <span class="text-green-400 font-mono text-xs">✅ Active</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm p-2 bg-black/30 rounded-lg">
+                        <span>Payloads</span>
+                        <span class="text-pink-400 font-bold text-xs">35+ Ready</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RNASAKS Contact -->
+            <div>
+                <h4 class="font-orbitron text-lg text-white mb-6 flex items-center">
+                    <i class="fas fa-user-ninja text-orange-400 mr-2"></i> RNASAKS
+                </h4>
+                <div class="text-sm space-y-2">
+                    <p class="text-green-300/80">Professional cybersecurity researcher</p>
+                    <div class="flex items-center text-xs text-gray-400">
+                        <i class="fab fa-github mr-2"></i>
+                        <span>@Rnasaks</span>
+                    </div>
+                    <div class="flex items-center text-xs text-gray-400">
+                        <i class="fas fa-envelope mr-2"></i>
+                        <span>rnasaks0@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="border-t border-green-500/20 pt-8 mt-12">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
+                <div class="flex items-center text-sm text-green-400 font-mono tracking-wider">
+                    <i class="fas fa-code mr-2"></i>
+                    <span>© 2026 RNASAKS - BD Hackers Elite Arsenal v4.0</span>
+                </div>
+                <div class="flex items-center gap-6 text-xs text-gray-400">
+                    <span><i class="fas fa-globe mr-1"></i>Global C2 Ready</span>
+                    <span><i class="fas fa-rocket mr-1"></i>35+ Payloads</span>
+                    <span class="font-bold text-green-400"><i class="fas fa-crown mr-1"></i>RNASAKS Edition</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        // Matrix rain effect (আগের মতো)
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+        const fontSize = 14; const columns = canvas.width / fontSize; const drops = Array(Math.floor(columns)).fill(1);
+        function drawMatrix(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#0F0';ctx.font=fontSize+'px monospace';for(let i=0;i<drops.length;i++){const text=chars[Math.floor(Math.random()*chars.length)];ctx.fillText(text,i*fontSize,drops[i]*fontSize);if(drops[i]*fontSize>canvas.height&&Math.random()>0.975) drops[i]=0;drops[i]++;} } setInterval(drawMatrix,50);
+
+        // Show modal on tool/course button click
+        document.querySelectorAll('.tool-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // পাবলিক চ্যানেল বাটন বাদ দিবে
+                if (this.textContent.includes('JOIN PUBLIC CHANNEL')) return;
+                
+                e.preventDefault();
+                document.getElementById('paymentModal').style.display = 'block';
+            });
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // generatePayload, copyPayload, onload (আগের মতো রাখো)
+        // ... তোমার পুরানো script অংশ ...
+    </script>
+</body>
+</html>
