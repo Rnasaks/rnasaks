@@ -34,7 +34,8 @@
           }
         }
 
-        const proxyResp = await originalFetch("/telegram-proxy", {
+        // on Vercel the serverless function is under /api
+        const proxyResp = await originalFetch("/api/telegram-proxy", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
