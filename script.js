@@ -172,7 +172,8 @@ window.safeSendMessage = async (bot, chat, text) => {
     });
     return (await res.json()).ok;
   } catch (e) {
-    console.error(e);
+    console.error("safeSendMessage direct fetch failed", e);
+    // network or CSP failure; nothing more we can do client-side
     return false;
   }
 };

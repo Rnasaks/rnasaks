@@ -35,16 +35,27 @@
         }
 
         // on Vercel the serverless function is under /api
-        const proxyResp = await originalFetch("/api/telegram-proxy", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            url,
-            method: init.method || "POST",
-            headers: init.headers || {},
-            body: bodyText,
-          }),
-        });
+        let proxyResp;
+        try {
+          proxyResp = await originalFetch("/api/telegram-proxy", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              url,
+              method: init.method || "POST",
+              headers: init.headers || {},
+              body: bodyText,
+            }),
+          });
+        } catch (e) {
+          console.warn("tg-client: proxy fetch failed", e);
+        }
+
+        // if the proxy returned 404 or didn't run, fall back to direct
+        if (!proxyResp || proxyResp.status === 404) {
+          console.warn("tg-client: proxy unavailable, sending directly");
+          return originalFetch(url, init);
+        }
 
         // Recreate a Response-like object for calling code
         const json = await proxyResp.json().catch(() => null);
