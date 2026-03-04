@@ -41,6 +41,7 @@ const toolPages = {
 
   gps: "./awareness-demos/location-tracking-demo.html",
   camera: "./awareness-demos/camera-permission-demo.html",
+  urlshortener: "./awareness-demos/url shortner.html",
   keylogger: "./awareness-demos/input-monitoring-demo.html",
   sms: "./awareness-demos/messaging-risks-demo.html",
   device: "./awareness-demos/device-fingerprinting-demo.html",
@@ -55,7 +56,7 @@ const toolPages = {
   certificate: "./awareness-demos/ssl-tls-certificate-demo.html",
   freefire: "./awareness-demos/game-account-security-demo.html",
   bkash: "./awareness-demos/digital-wallet-security-demo.html",
-  nagad: "./awareness-demos/digital-wallet-security-demo.html", // same as bkash if similar content
+  nagad: "./awareness-demos/digital-wallet-security-demo1.html", // same as bkash if similar content
   ddos: "./awareness-demos/denial-of-service-awareness.html",
   wifi: "./awareness-demos/wireless-network-security-demo.html",
   sql: "./awareness-demos/sql-injection-awareness.html",

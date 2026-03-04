@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Wireless Network Security Demo</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      button {
+        padding: 10px 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Wireless Network Security Demo</h1>
+    <p>Click "Scan" to see nearby Wi‑Fi networks (simulated).</p>
+    <button id="scanBtn">Scan</button>
+    <ul id="networks"></ul>
+    <script>
+      const nets = [
+        "Home_WiFi",
+        "Coffee_Shop",
+        "Free_Public",
+        "MyNetwork",
+        "Neighborhood",
+      ];
+      document.getElementById("scanBtn").addEventListener("click", () => {
+        const list = document.getElementById("networks");
+        list.innerHTML = "";
+        nets
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 3)
+          .forEach((n) => {
+            const li = document.createElement("li");
+            li.textContent = n;
+            list.appendChild(li);
+          });
+      });
+    </script>
+  </body>
+</html>

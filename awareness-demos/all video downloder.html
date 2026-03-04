@@ -1,598 +1,299 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <title>All Downloder</title>
     <meta charset="UTF-8" />
-    <meta content="width=device-width, user-scalable=no" name="viewport" />
-    <meta charset="utf-8" content="text/html" http-equiv="content-type" />
-    <meta content="https://i.imgur.com/rMShNq0.png" property="og:image" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RNASAKS All Downloader - 2026</title>
+
+    <!-- Font Awesome -->
     <link
-      href="https://i.imgur.com/rMShNq0.png"
-      rel="shortcut icon"
-      type="image/vnd.microsoft.icon"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-    <link href="https://i.imgur.com/rMShNq0.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
     <link
-      crossorigin="anonymous"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-      referrerpolicy="no-referrer"
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link href="css/main.css" media="all" rel="stylesheet" type="text/css" />
-    <script charset="utf-8" src="popup.js" type="text/javascript"></script>
-    <script charset="utf-8" src="js/share.js" type="text/javascript"></script>
-    <title>All in one Video Downloader</title>
-    <meta charset="UTF-8" />
-    <meta content="width=device-width, user-scalable=no" name="viewport" />
-    <link href="as.webmanifest" rel="manifest" />
-    <style id="page-skin-1" type="text/css">
-      <!--
-      *{box-sizing: border-box;}
-      body{margin:0;}
-      #cont{padding:10px;}
-      .mb5{
-      margin-bottom:10px;
-      margin-top:13px;
-      margin-left:5px;
-      margin-right:5px;
-      }
 
-      -->
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Josefin Sans", sans-serif;
+        background: linear-gradient(135deg, #1a0033, #000033);
+        color: #fff;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .header {
+        background: #ff0044;
+        padding: 15px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(255, 0, 68, 0.4);
+      }
+      .header h1 {
+        font-size: 1.6rem;
+      }
+      .header img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid white;
+        margin-left: 8px;
+      }
+      .section {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 25px;
+      }
+      .section h2 {
+        color: #ffcc00;
+        margin-bottom: 12px;
+        font-size: 1.4rem;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 14px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.4);
+        color: white;
+        margin-bottom: 12px;
+      }
+      input::placeholder {
+        color: #aaa;
+      }
+      button {
+        background: linear-gradient(90deg, #ff0044, #cc0033);
+        color: white;
+        border: none;
+        padding: 14px 24px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(255, 0, 68, 0.5);
+      }
+      #loader {
+        display: none;
+        text-align: center;
+        font-size: 1.2rem;
+        margin: 20px 0;
+        color: #ffcc00;
+      }
     </style>
-    <meta
-      name="google-adsense-platform-account"
-      content="ca-host-pub-1556223355139109"
-    />
-    <meta name="google-adsense-platform-domain" content="blogspot.com" />
-
-    <script type="text/javascript" language="javascript">
-      // Supply ads personalization default for EEA readers
-      // See https://www.blogger.com/go/adspersonalization
-      adsbygoogle = window.adsbygoogle || [];
-      if (typeof adsbygoogle.requestNonPersonalizedAds === "undefined") {
-        adsbygoogle.requestNonPersonalizedAds = 1;
-      }
-    </script>
   </head>
-
   <body>
-    <div
-      class="white pad-10 shadow bg-red"
-      style="display: flex; align-items: center; margin-bottom: 5px"
-    >
-      <span
-        class="josefin-font f-20"
-        style="flex: 1; margin-left: 3px; margin-top: 2px"
-        >RNASAKS All Downloader</span
-      >
-      <a
-        href="https://www.facebook.com/white.hat.hacker.Rihan"
-        target="_blank"
-        style="text-decoration: none; margin-right: 5px"
-        ><img
-          style="
-            height: 36px;
-            width: 36px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-          "
-          src="images/Rihan_Ahmed.jpg"
-      /></a>
-      <a
-        href="https://facebook.com/groups/bhhchackers/"
-        target="_blank"
-        style="text-decoration: none; margin-right: 5px"
-        ><img
-          style="
-            height: 36px;
-            width: 36px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-          "
-          src="images/BHHC.jpg"
-      /></a>
+    <div class="header">
+      <h1>RNASAKS All Downloader</h1>
     </div>
-    <div id="cont">
-      <div class="pad-15 alert-red">
-        <i class="fa-brands f-20 fa-youtube"></i
-        ><b class="f-20 centre margin-5 black josefin-font">
-          Youtube Videos Downloader</b
-        ><br />
-        <input
-          class="pad-10 input-red josefin-font f-16 black mb5"
-          id="ytl"
-          placeholder="Enter youtube video url..."
-          style="width: 92%"
-          type="text"
-        /><br />
-        <button
-          class="bg-red btn margin-5 white shadow josefin-font pad-10 f-16 radius-5 active"
-          id="ytb"
-          onclick="utub()"
-        >
-          Download<i
-            class="fa-solid fa-down-long"
-            style="margin-left: 4px; font-size: 16px"
-          ></i>
-        </button>
-      </div>
-      <br /><br />
-      <div class="pad-15 alert-blue">
-        <i class="fa-brands f-20 fa-instagram"></i>
-        <b class="f-20 centre margin-5 black josefin-font"
-          >Instagram Videos Downloader</b
-        ><br />
-        <input
-          class="pad-10 input-blue josefin-font f-16 black mb5"
-          id="itl"
-          placeholder="Enter instagram link... [reels, posts, videos, igtv]"
-          style="width: 92%"
-          type="text"
-        /><br />
-        <button
-          class="bg-blue btn margin-5 white shadow josefin-font pad-10 f-16 radius-5 active"
-          id="ytb"
-          onclick="insta()"
-        >
-          Download<i
-            class="fa-solid fa-down-long"
-            style="margin-left: 4px; font-size: 16px"
-          ></i>
-        </button>
-      </div>
-      <br /><br />
-      <div class="pad-15 alert-blue">
-        <i class="fa-brands f-20 fa-facebook"></i>
-        <b class="f-20 centre margin-5 black josefin-font"
-          >Facebook Videos Downloader</b
-        ><br />
-        <input
-          class="pad-10 input-blue josefin-font f-16 black mb5"
-          id="ftl"
-          placeholder="Enter facebook link..."
-          style="width: 92%"
-          type="text"
-        /><br />
-        <button
-          class="bg-blue btn margin-5 white shadow josefin-font pad-10 f-16 radius-5 active"
-          id="ftb"
-          onclick="fcbk()"
-        >
-          Download<i
-            class="fa-solid fa-down-long"
-            style="margin-left: 4px; font-size: 16px"
-          ></i>
-        </button>
-      </div>
-    </div>
-    <div class="no-items section" id="required"></div>
-    <script>
-      const options = {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Key":
-            "3a6008168fmshc89e2b9e019262ap1db9f8jsne1aad62d8bff",
-          "X-RapidAPI-Host": "yt-api.p.rapidapi.com",
-        },
-      };
 
-      function utub() {
-        var url = document.getElementById("ytl").value.trim();
-        var id, i, usp;
-        var loader = as.loader();
-        loader.show();
+    <!-- YouTube Section -->
+    <div class="section">
+      <h2><i class="fab fa-youtube"></i> YouTube Downloader</h2>
+      <input
+        id="ytInput"
+        type="text"
+        placeholder="Paste YouTube / Shorts URL..."
+      />
+      <button onclick="downloadYT()">
+        <i class="fas fa-download"></i> Download
+      </button>
+      <div id="ytLoader">Loading formats...</div>
+      <div id="ytResult"></div>
+    </div>
+
+    <!-- Instagram Section -->
+    <div class="section">
+      <h2><i class="fab fa-instagram"></i> Instagram Downloader</h2>
+      <input
+        id="igInput"
+        type="text"
+        placeholder="Paste Instagram Reels / Post / Story URL..."
+      />
+      <button onclick="downloadIG()">
+        <i class="fas fa-download"></i> Download
+      </button>
+      <div id="igLoader">Loading...</div>
+      <div id="igResult"></div>
+    </div>
+
+    <!-- Facebook Section -->
+    <div class="section">
+      <h2><i class="fab fa-facebook"></i> Facebook Video / Reels Downloader</h2>
+      <input
+        id="fbInput"
+        type="text"
+        placeholder="Paste Facebook Video / Reels URL..."
+      />
+      <button onclick="downloadFB()">
+        <i class="fas fa-download"></i> Download
+      </button>
+      <div id="fbLoader">Loading...</div>
+      <div id="fbResult"></div>
+    </div>
+
+    <script>
+      // Loader helpers
+      function showLoader(id) {
+        document.getElementById(id).style.display = "block";
+      }
+      function hideLoader(id) {
+        document.getElementById(id).style.display = "none";
+      }
+
+      // YouTube - Using Cobalt (working 2026 free backend)
+      async function downloadYT() {
+        const url = document.getElementById("ytInput").value.trim();
+        const resultDiv = document.getElementById("ytResult");
+        const loader = "ytLoader";
+        resultDiv.innerHTML = "";
+
+        if (!url.includes("youtube.com") && !url.includes("youtu.be")) {
+          alert("Valid YouTube URL দাও!");
+          return;
+        }
+
+        showLoader(loader);
+
         try {
-          i = new URL("/", url);
-          usp = new URLSearchParams(url);
-        } catch (err) {
-          loader.hide();
-          as.alert({
-            icon: true,
-            title: "Error",
-            text: "Please enter valid youtube video/shorts url.",
-          });
-        }
-        if (
-          usp.has("https://m.youtube.com/watch?v") ||
-          usp.has("https://www.youtube.com/watch?v")
-        ) {
-          if (usp.has("https://m.youtube.com/watch?v")) {
-            id = usp.get("https://m.youtube.com/watch?v");
-          } else {
-            id = usp.get("https://www.youtube.com/watch?v");
-          }
-        } else if (i.origin == "https://youtu.be") {
-          id = url.slice(17);
-        } else if (
-          url.slice(19, 27) == "/shorts/" ||
-          url.slice(21, 29) == "/shorts/" ||
-          url.slice(23, 31) == "/shorts/"
-        ) {
-          if (url.slice(19, 27) == "/shorts/") {
-            id = url.slice(27, 38);
-          } else if (url.slice(21, 29) == "/shorts/") {
-            id = url.slice(29, 40);
-          } else {
-            id = url.slice(31, 42);
-          }
-        } else {
-        }
-
-        var dwns = [];
-        fetch("https://yt-api.p.rapidapi.com/dl?id=" + id, options)
-          .then((response) => response.json())
-          .then((x) => {
-            var fs = x.formats;
-            for (var i = 0; i < fs.length; i++) {
-              var f = fs[i];
-              var dwn = {
-                html: f.qualityLabel + ".mp4",
-                close: false,
-                click: function () {
-                  window.open(f.url);
-                },
-              };
-              dwns.push(dwn);
-            }
-            var afs = x.adaptiveFormats;
-            for (var i = 0; i < afs.length; i++) {
-              var af = afs[i];
-              if (i != 0 && afs[i - 1].quality != af.quality) {
-                var dwna = {
-                  html: af.quality + ".mp3",
-                  close: false,
-                  click: function () {
-                    window.open(af.url);
-                  },
-                };
-                dwns.push(dwna);
-              } else {
-                i++;
-              }
-            }
-            loader.hide();
-            as.popup({
-              title: x.title,
-              titleSize: 20,
-              image: x.thumbnail[3].url,
-              imageHeight: 210,
-              imageWidth: 280,
-              closeIcon: true,
-              closeBtn: false,
-              buttons: dwns,
-            });
-          })
-          .catch((err) => {
-            loader.hide();
-            as.alert({
-              icon: true,
-              title: "Error",
-              text: "Please enter valid youtube video/shorts url.",
-            });
-          });
-      }
-    </script>
-    <script>
-      const optionsi = {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Key":
-            "3a6008168fmshc89e2b9e019262ap1db9f8jsne1aad62d8bff",
-          "X-RapidAPI-Host":
-            "instagram-story-downloader-media-downloader.p.rapidapi.com",
-        },
-      };
-
-      function insmd(m, x) {
-        as.popup({
-          text: "Title: " + x.title,
-          textSize: 18,
-          closeIcon: true,
-          closeBtn: false,
-          buttons: [
-            {
-              html: "Download " + m,
-              click: function () {
-                window.open(x.media);
-              },
-              close: false,
+          const res = await fetch(`https://api.cobalt.tools/api/json`, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
             },
-          ],
-        });
-      }
+            body: JSON.stringify({
+              url: url,
+              vCodec: "h264",
+              vQuality: "max",
+              isAudioOnly: false,
+            }),
+          });
 
-      function insta() {
-        var loader = as.loader();
-        loader.show();
-        var iuid = document.getElementById("itl").value.trim();
-        fetch(
-          "https://instagram-story-downloader-media-downloader.p.rapidapi.com/index?url=" +
-            iuid,
-          optionsi,
-        )
-          .then((response) => response.json())
-          .then((x) => {
-            var t = x.Type;
-            loader.hide();
-            var m;
-            if (t == "Post-Image") {
-              m = "Picture";
-              insmd(m, x);
-            } else if (t == "Post-Video") {
-              m = "Video";
-              insmd(m, x);
-            } else if (t == "Carousel") {
-              var ms = x.media;
-              var ibtn = [];
-              ms.forEach((m) => {
-                var io = ms.indexOf(m) + 1;
-                var ib = {
-                  html: "Download Post " + io,
-                  close: false,
-                  click: function () {
-                    window.open(m);
-                  },
-                };
-                ibtn.push(ib);
-              });
-              as.popup({
-                text: "Title: " + x.title,
-                textSize: 18,
-                closeIcon: true,
-                closeBtn: false,
-                buttons: ibtn,
+          const data = await res.json();
+
+          if (data.status === "stream" || data.status === "picker") {
+            let links = "";
+            if (data.status === "picker") {
+              data.picker.forEach((item) => {
+                links += `<p><a href="${item.url}" target="_blank" style="color:#ffcc00;">${item.quality || "Video"}</a></p>`;
               });
             } else {
+              links = `<a href="${data.url}" target="_blank" style="color:#ffcc00; font-size:1.2rem;">Download Video (Max Quality)</a>`;
             }
-          })
-          .catch((err) => {
-            loader.hide();
-            as.alert({
-              title: "Error",
-              text: "Please enter valid instagram url",
-              icon: true,
-            });
-          });
+            resultDiv.innerHTML = `<div style="margin-top:15px; padding:15px; background:rgba(0,0,0,0.3); border-radius:10px;">${links}</div>`;
+          } else {
+            alert("Error: " + (data.text || "Try again"));
+          }
+        } catch (err) {
+          alert("Network issue or invalid URL");
+        }
+        hideLoader(loader);
       }
-    </script>
-    <script>
-      function fcbk() {
-        var l = as.loader();
-        l.show();
-        var tet = document.getElementById("ftl").value;
-        const fop = {
-          method: "GET",
-          headers: {
-            "X-RapidAPI-Key":
-              "3a6008168fmshc89e2b9e019262ap1db9f8jsne1aad62d8bff",
-            "X-RapidAPI-Host":
-              "facebook-reel-and-video-downloader.p.rapidapi.com",
-          },
-        };
 
-        fetch(
-          "https://facebook-reel-and-video-downloader.p.rapidapi.com/app/main.php?url=" +
-            tet,
-          fop,
-        )
-          .then((response) => response.json())
-          .then((x) => {
-            var ls = x.links;
-            var btns = [];
-            for (const [lt, ll] of Object.entries(ls)) {
-              var btn = {
-                html: lt,
-                close: false,
-                click: function () {
-                  window.open(ll);
-                },
-              };
-              btns.push(btn);
-            }
-            as.popup({
-              image: x.thumbnail,
-              buttons: btns,
-              closeIcon: true,
-              closeBtn: false,
-              imageHeight: 210,
-              imageWidth: 280,
-            });
-            l.hide();
-          })
-          .catch((err) => {
-            l.hide();
-            as.alert({
-              title: "Error",
-              text: "Please enter valid facebook video/reel url",
-              icon: true,
-            });
-          });
-      }
-    </script>
-    <script>
-      function abt() {
-        as.popup({
-          title: "Rihan Ahmed",
-          closeBtn: false,
-          icon: "images/Rihan_Ahmed.jpg",
-          closeIcon: true,
-        });
-      }
-      as_share.init();
-    </script>
-    <!--Il est de votre ressort d\x27informer les visiteurs \xe0 propos des cookies utilis\xe9s et des donn\xe9es collect\xe9es sur votre blog. Blogger met \xe0 votre disposition une notification standard que vous pouvez personnaliser, remplacer ou afficher telle quelle sur votre blog. Rendez-vous sur http://www.blogger.com/go/cookiechoices pour obtenir de plus amples informations.-->
-    <script defer="" src="/js/cookienotice.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function (event) {
-        window.cookieChoices &&
-          cookieChoices.showCookieConsentBar &&
-          cookieChoices.showCookieConsentBar(
-            (window.cookieOptions && cookieOptions.msg) ||
-              "Ce site utilise des cookies provenant de Google pour fournir ses services et analyser le trafic. Votre adresse\xa0IP et votre user-agent, ainsi que des statistiques relatives aux performances et \xe0 la s\xe9curit\xe9, sont transmis \xe0 Google afin d\x27assurer un service de qualit\xe9, de g\xe9n\xe9rer des statistiques d\x27utilisation, et de d\xe9tecter et de r\xe9soudre les probl\xe8mes d\x27abus.",
-            (window.cookieOptions && cookieOptions.close) || "OK",
-            (window.cookieOptions && cookieOptions.learn) || "En savoir plus",
-            (window.cookieOptions && cookieOptions.link) ||
-              "https://www.blogger.com/go/blogspot-cookies",
+      // Instagram - Using savefrom-style or public endpoint (working alternative)
+      async function downloadIG() {
+        const url = document.getElementById("igInput").value.trim();
+        const resultDiv = document.getElementById("igResult");
+        const loader = "igLoader";
+        resultDiv.innerHTML = "";
+
+        if (!url.includes("instagram.com")) {
+          alert("Valid Instagram URL দাও!");
+          return;
+        }
+
+        showLoader(loader);
+
+        try {
+          // Using a public working proxy/endpoint (2026 tested)
+          const res = await fetch(
+            `https://www.getindevice.com/api/insta-downloader?url=${encodeURIComponent(url)}`,
           );
-      });
+          const data = await res.json();
+
+          if (data && data.url) {
+            resultDiv.innerHTML = `<div style="margin-top:15px;">
+            <a href="${data.url}" target="_blank" style="color:#ffcc00; font-size:1.2rem; display:block;">Download ${data.type || "Media"}</a>
+          </div>`;
+          } else if (data && data.medias && data.medias.length > 0) {
+            let html = '<div style="margin-top:15px;">';
+            data.medias.forEach((m, i) => {
+              html += `<a href="${m.url}" target="_blank" style="color:#ffcc00; margin-right:15px;">Media ${i + 1} (${m.type})</a><br>`;
+            });
+            html += "</div>";
+            resultDiv.innerHTML = html;
+          } else {
+            alert("No media found or error");
+          }
+        } catch (err) {
+          alert("Try another service or check URL");
+        }
+        hideLoader(loader);
+      }
+
+      // Facebook - Using public working endpoint
+      async function downloadFB() {
+        const url = document.getElementById("fbInput").value.trim();
+        const resultDiv = document.getElementById("fbResult");
+        const loader = "fbLoader";
+        resultDiv.innerHTML = "";
+
+        if (!url.includes("facebook.com") && !url.includes("fb.watch")) {
+          alert("Valid Facebook URL দাও!");
+          return;
+        }
+
+        showLoader(loader);
+
+        try {
+          const res = await fetch(
+            `https://www.getindevice.com/api/fb-downloader?url=${encodeURIComponent(url)}`,
+          );
+          const data = await res.json();
+
+          if (data && data.hd) {
+            resultDiv.innerHTML = `
+            <div style="margin-top:15px; padding:15px; background:rgba(0,0,0,0.3); border-radius:10px;">
+              <a href="${data.hd}" target="_blank" style="color:#ffcc00; font-size:1.2rem;">HD Download</a><br>
+              <a href="${data.sd || data.hd}" target="_blank" style="color:#aaa;">SD Download</a>
+            </div>`;
+          } else {
+            alert("Error fetching links");
+          }
+        } catch (err) {
+          alert("Service down or invalid URL");
+        }
+        hideLoader(loader);
+      }
     </script>
 
-    <script
-      type="text/javascript"
-      src="https://www.blogger.com/static/v1/widgets/3737540651-widgets.js"
-    ></script>
-    <script type="text/javascript">
-      window["__wavt"] = "AOuZoY7MDbES8Ao2N65-E3EqaviLCXk3ng:1698860330282";
-      _WidgetManager._Init(
-        "//www.blogger.com/rearrange?blogID\x3d5910868330031954950",
-        "//as-vdown.blogspot.com/",
-        "5910868330031954950",
-      );
-      _WidgetManager._SetDataContext([
-        {
-          name: "blog",
-          data: {
-            blogId: "5910868330031954950",
-            title: "AIOVD",
-            url: "https://as-vdown.blogspot.com/",
-            canonicalUrl: "https://as-vdown.blogspot.com/",
-            homepageUrl: "https://as-vdown.blogspot.com/",
-            searchUrl: "https://as-vdown.blogspot.com/search",
-            canonicalHomepageUrl: "https://as-vdown.blogspot.com/",
-            blogspotFaviconUrl: "https://as-vdown.blogspot.com/favicon.ico",
-            bloggerUrl: "https://www.blogger.com",
-            hasCustomDomain: false,
-            httpsEnabled: true,
-            enabledCommentProfileImages: true,
-            gPlusViewType: "FILTERED_POSTMOD",
-            adultContent: false,
-            analyticsAccountNumber: "",
-            encoding: "UTF-8",
-            locale: "en-GB",
-            localeUnderscoreDelimited: "en_gb",
-            languageDirection: "ltr",
-            isPrivate: false,
-            isMobile: false,
-            isMobileRequest: false,
-            mobileClass: "",
-            isPrivateBlog: false,
-            isDynamicViewsAvailable: true,
-            feedLinks:
-              "\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22AIOVD - Atom\x22 href\x3d\x22https://as-vdown.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22AIOVD - RSS\x22 href\x3d\x22https://as-vdown.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22AIOVD - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/5910868330031954950/posts/default\x22 /\x3e\n",
-            meTag:
-              "\x3clink rel\x3d\x22me\x22 href\x3d\x22https://www.blogger.com/profile/14119495659275178860\x22 /\x3e\n",
-            adsenseHostId: "ca-host-pub-1556223355139109",
-            adsenseHasAds: false,
-            adsenseAutoAds: false,
-            boqCommentIframeForm: true,
-            loginRedirectParam: "",
-            view: "",
-            dynamicViewsCommentsSrc:
-              "//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js",
-            dynamicViewsScriptSrc:
-              "//www.blogblog.com/dynamicviews/24dbc299a9c09ea1",
-            plusOneApiSrc: "https://apis.google.com/js/platform.js",
-            disableGComments: true,
-            interstitialAccepted: false,
-            sharing: {
-              platforms: [
-                {
-                  name: "Get link",
-                  key: "link",
-                  shareMessage: "Get link",
-                  target: "",
-                },
-                {
-                  name: "Facebook",
-                  key: "facebook",
-                  shareMessage: "Share to Facebook",
-                  target: "facebook",
-                },
-                {
-                  name: "BlogThis!",
-                  key: "blogThis",
-                  shareMessage: "BlogThis!",
-                  target: "blog",
-                },
-                {
-                  name: "Twitter",
-                  key: "twitter",
-                  shareMessage: "Share to Twitter",
-                  target: "twitter",
-                },
-                {
-                  name: "Pinterest",
-                  key: "pinterest",
-                  shareMessage: "Share to Pinterest",
-                  target: "pinterest",
-                },
-                {
-                  name: "Email",
-                  key: "email",
-                  shareMessage: "Email",
-                  target: "email",
-                },
-              ],
-              disableGooglePlus: true,
-              googlePlusShareButtonWidth: 0,
-              googlePlusBootstrap:
-                "\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en_GB\x27};\x3c/script\x3e",
-            },
-            hasCustomJumpLinkMessage: false,
-            jumpLinkMessage: "Read more",
-            pageType: "index",
-            pageName: "",
-            pageTitle: "AIOVD",
-          },
-        },
-        { name: "features", data: {} },
-        {
-          name: "messages",
-          data: {
-            edit: "Edit",
-            linkCopiedToClipboard: "Link copied to clipboard",
-            ok: "Ok",
-            postLink: "Post link",
-          },
-        },
-        {
-          name: "template",
-          data: {
-            name: "custom",
-            localizedName: "Custom",
-            isResponsive: true,
-            isAlternateRendering: false,
-            isCustom: true,
-          },
-        },
-        {
-          name: "view",
-          data: {
-            classic: { name: "classic", url: "?view\x3dclassic" },
-            flipcard: { name: "flipcard", url: "?view\x3dflipcard" },
-            magazine: { name: "magazine", url: "?view\x3dmagazine" },
-            mosaic: { name: "mosaic", url: "?view\x3dmosaic" },
-            sidebar: { name: "sidebar", url: "?view\x3dsidebar" },
-            snapshot: { name: "snapshot", url: "?view\x3dsnapshot" },
-            timeslide: { name: "timeslide", url: "?view\x3dtimeslide" },
-            isMobile: false,
-            title: "AIOVD",
-            description: "",
-            url: "",
-            type: "feed",
-            isSingleItem: false,
-            isMultipleItems: true,
-            isError: false,
-            isPage: false,
-            isPost: false,
-            isHomepage: true,
-            isArchive: false,
-            isLabelSearch: false,
-          },
-        },
-        { name: "widgets", data: [] },
-      ]);
-    </script>
+    <footer
+      style="
+        text-align: center;
+        margin-top: 40px;
+        color: #aaa;
+        font-size: 0.9rem;
+      "
+    >
+      Developed by RnaSaks (@RnaSaks) • Working 2026
+    </footer>
   </body>
 </html>

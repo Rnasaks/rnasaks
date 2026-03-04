@@ -1,97 +1,211 @@
 <!doctype html>
-<html>
+<html lang="en" class="scroll-smooth">
   <head>
-    <title>URL Shortner</title>
     <meta charset="UTF-8" />
-    <meta content="width=device-width, user-scalable=no" name="viewport" />
-    <meta content="https://i.imgur.com/e4Jexcl.png" property="og:image" />
-    <link href="https://i.imgur.com/e4Jexcl.png" />
-    <link href="https://i.imgur.com/e4Jexcl.png" />
-    <link href="css/main.css" rel="stylesheet" />
-    <link href="as.webmanifest" rel="manifest" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="popup.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link Shortener - Rnasaks</title>
+    <meta property="og:image" content="https://i.imgur.com/e4Jexcl.png" />
+
+    <!-- Google Fonts: Orbitron / Josefin Sans mix -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Orbitron:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- Tailwind CDN (for quick modern styling) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              josefin: ['"Josefin Sans"', "sans-serif"],
+              orbitron: ["Orbitron", "sans-serif"],
+            },
+            colors: {
+              "royal-blue": "#4169e1",
+              "deep-blue": "#1e3a8a",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #e2e8f0;
+        min-height: 100vh;
+        font-family: "Josefin Sans", sans-serif;
+      }
+      .glass {
+        background: rgba(30, 58, 138, 0.25);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .btn-hover {
+        transition: all 0.3s ease;
+      }
+      .btn-hover:hover {
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 10px 25px -5px rgba(65, 105, 225, 0.4);
+      }
+      #result {
+        transition: all 0.4s ease;
+      }
+    </style>
   </head>
 
-  <body style="margin: 0; padding: 0">
-    <div
-      class="pad-10 shadow bg-royal-blue relative"
-      style="margin-bottom: 15px; display: flex; align-items: center"
-    >
-      <span
-        class="white josefin-font f-20"
-        style="flex: 1; margin-left: 3px; margin-top: 2px"
-        >Link Shortner</span
+  <body class="antialiased">
+    <!-- Header -->
+    <header class="glass sticky top-0 z-50 border-b border-slate-700/50">
+      <div
+        class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between"
       >
-      <button
-        class="s-40 active circle btn right"
-        onclick="abt()"
-        style="background: transparent; display: flex; align-items: center"
-      >
-        <svg fill="#fff" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path
-            clip-rule="evenodd"
-            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-            fill-rule="evenodd"
-          ></path>
-        </svg>
-      </button>
-    </div>
-    <div class="alert-blue margin-10">
-      <input
-        id="link"
-        type="text"
-        class="input-blue f-16 josefin-font"
-        style="width: 100%"
-        placeholder="Enter a link..."
-      />
-      <button
-        class="btn bg-blue josefin-font white pad-10 shadow radius-5 active f-16"
-        style="margin-top: 15px"
-        onclick="short(document.getElementById('link').value)"
-      >
-        Short Link</button
-      ><br />
-      <a
-        class="josefin-font"
-        id="sta"
-        style="display: none"
-        onclick="cpy()"
-      ></a>
-    </div>
-    <script>
-      var sta = document.getElementById("sta");
+        <h1
+          class="text-2xl font-orbitron font-bold text-cyan-400 tracking-wider"
+        >
+          Link Shortener
+        </h1>
+        <div class="text-sm text-slate-400">
+          Developed by
+          <span class="text-purple-400 font-semibold">@Rnasaks</span>
+        </div>
+      </div>
+    </header>
 
-      let requestHeaders = {
-        "Content-Type": "application/json",
-        apikey: "d4deb8f0ca6f4f24b38fcc3164b72b21",
-        workspace: "52e91ce99774498b8a5081729378b6a3",
-      };
+    <!-- Main Content -->
+    <main class="max-w-2xl mx-auto px-6 py-16">
+      <div class="text-center mb-12">
+        <h2
+          class="text-4xl md:text-5xl font-bold font-orbitron mb-4 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"
+        >
+          Shorten Your Links Instantly
+        </h2>
+        <p class="text-lg text-slate-300 max-w-xl mx-auto">
+          Transform long messy URLs into clean, shareable short links — fast,
+          free & beautiful.
+        </p>
+      </div>
+
+      <!-- Card -->
+      <div class="glass rounded-2xl p-8 md:p-10 shadow-2xl shadow-black/40">
+        <div class="space-y-6">
+          <div class="relative">
+            <input
+              id="link"
+              type="url"
+              placeholder="Paste your long link here..."
+              class="w-full px-5 py-5 bg-slate-900/40 border border-slate-600/50 rounded-xl text-lg text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/30 transition-all"
+            />
+            <i
+              class="fas fa-link absolute right-5 top-1/2 -translate-y-1/2 text-slate-400"
+            ></i>
+          </div>
+
+          <button
+            onclick="short(document.getElementById('link').value)"
+            class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-bold text-lg py-4 rounded-xl shadow-lg btn-hover"
+          >
+            <i class="fas fa-scissors mr-2"></i> Shorten Now
+          </button>
+
+          <!-- Result Area -->
+          <div
+            id="result"
+            class="mt-6 opacity-0 transform translate-y-4 transition-all duration-500"
+          >
+            <div
+              class="flex items-center justify-between bg-slate-800/50 p-4 rounded-xl border border-slate-700/50"
+            >
+              <a
+                id="shortLink"
+                href="#"
+                target="_blank"
+                class="text-cyan-400 hover:text-cyan-300 font-medium break-all"
+              ></a>
+              <button
+                onclick="copyLink()"
+                class="bg-slate-700 hover:bg-slate-600 text-white px-5 py-2 rounded-lg transition flex items-center gap-2"
+              >
+                <i class="fas fa-copy"></i> Copy
+              </button>
+            </div>
+            <p
+              id="status"
+              class="text-center text-sm text-green-400 mt-3 hidden"
+            >
+              ✓ Copied to clipboard!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer note -->
+      <p class="text-center text-slate-500 text-sm mt-12">
+        Powered by Rebrandly • Made with ❤️ by Rnasaks • 2026
+      </p>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+      let shortUrl = "";
 
       function short(u) {
+        if (!u || !u.startsWith("http")) {
+          alert("Please enter a valid URL (with http/https)");
+          return;
+        }
+
         let linkRequest = {
           destination: u,
           domain: { fullName: "rebrand.ly" },
         };
+
         $.ajax({
           url: "https://api.rebrandly.com/v1/links",
-          type: "post",
+          type: "POST",
           data: JSON.stringify(linkRequest),
-          headers: requestHeaders,
-          dataType: "json",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: "d4deb8f0ca6f4f24b38fcc3164b72b21",
+            workspace: "52e91ce99774498b8a5081729378b6a3",
+          },
           success: (link) => {
-            sta.innerText = link.shortUrl + " ⬅️click the link to copy";
-            sta.style.display = "block";
-            localStorage.setItem("x", link.shortUrl);
+            shortUrl = link.shortUrl;
+            document.getElementById("shortLink").innerText = shortUrl;
+            document.getElementById("shortLink").href = shortUrl;
+            document
+              .getElementById("result")
+              .classList.remove("opacity-0", "translate-y-4");
+            document
+              .getElementById("result")
+              .classList.add("opacity-100", "translate-y-0");
+          },
+          error: () => {
+            alert("Something went wrong! Check your link or try again later.");
           },
         });
       }
-      function cpy() {
-        navigator.clipboard.writeText(localStorage.getItem("x"));
-        as.toast({
-          type: "success",
-          title: "copied !",
-          timer: 2000,
+
+      function copyLink() {
+        if (!shortUrl) return;
+
+        navigator.clipboard.writeText(shortUrl).then(() => {
+          const status = document.getElementById("status");
+          status.classList.remove("hidden");
+          setTimeout(() => status.classList.add("hidden"), 2500);
         });
       }
     </script>

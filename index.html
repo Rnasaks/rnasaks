@@ -17,7 +17,7 @@
     />
     <meta name="robots" content="noindex, nofollow" />
 
-    <title>CyberSec Awareness Lab v4.0 - Educational Demos</title>
+    <title>CyberSec Awareness Lab v4.0 - Educational Security Tools</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -36,53 +36,66 @@
     <header>
       <h1 class="logo-main">CyberSec Awareness Lab</h1>
       <p class="text-green-400 font-bold tracking-widest text-lg">
-        EDUCATIONAL SECURITY AWARENESS DEMOS
+        EDUCATIONAL SECURITY AWARENESS TOOLS - LIVE
       </p>
     </header>
 
-    <!-- Educational Telegram Bot Demo Panel (Simulation Only - No Real Send) -->
+    <!-- Telegram Bot Live Configuration Panel -->
     <div class="config-panel">
       <h3 class="font-orbitron text-white mb-4 text-center text-xl">
-        <i class="fas fa-server mr-2"></i> EDUCATIONAL DEMO CONFIGURATION
+        <i class="fas fa-server mr-2"></i> TELEGRAM BOT CONFIGURATION - LIVE
+        MODE
       </h3>
-      <div class="text-center text-yellow-400 font-bold mb-4">
-        This is a simulation for learning how bot configs work. No real data is
-        sent.
+      <div class="text-center text-cyan-400 font-bold mb-4">
+        ✅ Enter your real Telegram Bot Token & Chat ID below. Messages will be
+        delivered immediately.
       </div>
       <div class="config-grid">
         <div>
           <label class="block text-xs text-green-400 mb-1"
-            >🤖 BOT TOKEN (Demo)</label
+            >🤖 TELEGRAM BOT TOKEN</label
           >
           <input
-            type="text"
+            type="password"
             id="globalBotToken"
             class="config-input"
-            placeholder="demo:123456:ABC-DEF..."
-            value="demo:123456:ABC-DEF..."
+            placeholder="bot123456:ABC-DEF-GHI-JKL..."
           />
+          <small class="text-gray-400 text-xs mt-1"
+            >Get from @BotFather on Telegram</small
+          >
         </div>
         <div>
           <label class="block text-xs text-green-400 mb-1"
-            >💬 CHAT ID (Demo)</label
+            >💬 TELEGRAM CHAT ID</label
           >
           <input
             type="text"
             id="globalChatId"
             class="config-input"
             placeholder="123456789"
-            value="123456789"
           />
+          <small class="text-gray-400 text-xs mt-1"
+            >Your chat ID with the bot. Send /start to the bot first, then check
+            getUpdates.</small
+          >
         </div>
-        <div class="mt-6 text-center space-x-3">
+        <div class="mt-6 text-center space-x-4">
+          <button
+            id="enableLiveBtn"
+            class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg text-sm transition-all"
+          >
+            <i class="fas fa-unlock mr-2"></i>ENABLE LIVE MODE
+          </button>
           <button
             id="testSendBtn"
-            class="px-6 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg text-sm transition-all"
+            class="px-6 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled
           >
-            <i class="fas fa-paper-plane mr-2"></i>SIMULATE SEND
+            <i class="fas fa-paper-plane mr-2"></i>SEND TEST MESSAGE
           </button>
           <span id="sendStatus" class="text-lg font-bold text-yellow-400 ml-4"
-            >STATUS: READY</span
+            >STATUS: AWAITING LIVE MODE</span
           >
         </div>
       </div>
@@ -173,13 +186,13 @@
             >
           </div>
           <h3 class="text-lg font-orbitron text-white mb-2">
-            Location Awareness Demo
+            Location Tracking Tool
           </h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational IP and browser location example
           </p>
           <button onclick="generatePayload('gps')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-gps" class="payload-output"></div>
         </div>
@@ -193,15 +206,36 @@
             >
           </div>
           <h3 class="text-lg font-orbitron text-white mb-2">
-            Camera Permission Demo
+            Camera Access Tool
           </h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational browser video access example
           </p>
           <button onclick="generatePayload('camera')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-camera" class="payload-output"></div>
+        </div>
+
+        <div class="tool-card">
+          <div class="flex justify-between items-start mb-3">
+            <i class="fas fa-link text-3xl text-cyan-400 tool-icon"></i>
+            <span
+              class="bg-cyan-600/30 text-cyan-400 text-xs px-2 py-1 rounded-full font-bold"
+            >
+              URL SHORTENER
+            </span>
+          </div>
+          <h3 class="text-lg font-orbitron text-white mb-2">
+            URL Shortener Tool
+          </h3>
+          <p class="text-xs text-green-200/80 mb-3">
+            লম্বা লিংক → ছোট লিংক – এক ক্লিকে শেয়ার! 🚀
+          </p>
+          <button onclick="generatePayload('urlshortener')" class="tool-btn">
+            <i class="fas fa-compress-arrows-alt mr-2"></i>OPEN TOOL
+          </button>
+          <div id="output-urlshortener" class="payload-output"></div>
         </div>
 
         <div class="tool-card">
@@ -213,13 +247,13 @@
             >
           </div>
           <h3 class="text-lg font-orbitron text-white mb-2">
-            Input Monitoring Demo
+            Input Tracking Tool
           </h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational keystroke example
           </p>
           <button onclick="generatePayload('keylogger')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-keylogger" class="payload-output"></div>
         </div>
@@ -232,14 +266,12 @@
               >MESSAGING</span
             >
           </div>
-          <h3 class="text-lg font-orbitron text-white mb-2">
-            Messaging Risks Demo
-          </h3>
+          <h3 class="text-lg font-orbitron text-white mb-2">SMS Boom ber</h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational messaging example
           </p>
           <button onclick="generatePayload('sms')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-sms" class="payload-output"></div>
         </div>
@@ -253,13 +285,13 @@
             >
           </div>
           <h3 class="text-lg font-orbitron text-white mb-2">
-            Device Information Demo
+            Device Information Tool
           </h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational device details example
           </p>
           <button onclick="generatePayload('device')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-device" class="payload-output"></div>
         </div>
@@ -273,13 +305,13 @@
             >
           </div>
           <h3 class="text-lg font-orbitron text-white mb-2">
-            Email Security Demo
+            Email Access Tool
           </h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational email protection example
           </p>
           <button onclick="generatePayload('gmail')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-gmail" class="payload-output"></div>
         </div>
@@ -296,13 +328,13 @@
             >
           </div>
           <h3 class="text-lg font-orbitron text-white mb-2">
-            Social Profile Privacy Demo
+            Facebook Access Tool
           </h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational social media privacy example
           </p>
           <button onclick="generatePayload('facebook')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-facebook" class="payload-output"></div>
         </div>
@@ -317,13 +349,13 @@
             >
           </div>
           <h3 class="text-lg font-orbitron text-white mb-2">
-            Social Feed Privacy Demo
+            Instagram Access Tool
           </h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational content sharing example
           </p>
           <button onclick="generatePayload('instagram')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-instagram" class="payload-output"></div>
         </div>
@@ -338,13 +370,13 @@
             >
           </div>
           <h3 class="text-lg font-orbitron text-white mb-2">
-            Messaging App Security Demo
+            WhatsApp Access Tool
           </h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational chat security example
           </p>
           <button onclick="generatePayload('whatsapp')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-whatsapp" class="payload-output"></div>
         </div>
@@ -359,13 +391,13 @@
             >
           </div>
           <h3 class="text-lg font-orbitron text-white mb-2">
-            Secure Messaging Demo
+            Telegram Access Tool
           </h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational secure chat example
           </p>
           <button onclick="generatePayload('telegram')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-telegram" class="payload-output"></div>
         </div>
@@ -380,13 +412,13 @@
             >
           </div>
           <h3 class="text-lg font-orbitron text-white mb-2">
-            Short Video Platform Awareness
+            TikTok Access Tool
           </h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational video sharing risks
           </p>
           <button onclick="generatePayload('tiktok')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-tiktok" class="payload-output"></div>
         </div>
@@ -400,14 +432,12 @@
               >CHAT APP</span
             >
           </div>
-          <h3 class="text-lg font-orbitron text-white mb-2">
-            Chat App Security Demo
-          </h3>
+          <h3 class="text-lg font-orbitron text-white mb-2">IMO Access Tool</h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational video call example
           </p>
           <button onclick="generatePayload('imo')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-imo" class="payload-output"></div>
         </div>
@@ -424,13 +454,13 @@
             >
           </div>
           <h3 class="text-lg font-orbitron text-white mb-2">
-            Phone Number Privacy Awareness
+            Phone Number Lookup Tool
           </h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational number information demo
           </p>
           <button onclick="generatePayload('phonelookup')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-phonelookup" class="payload-output"></div>
         </div>
@@ -447,13 +477,13 @@
             >
           </div>
           <h3 class="text-lg font-orbitron text-white mb-2">
-            SSL/TLS Certificate Awareness
+            Birth Certificate SS
           </h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational certificate basics
           </p>
           <button onclick="generatePayload('certificate')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-certificate" class="payload-output"></div>
         </div>
@@ -468,13 +498,13 @@
             >
           </div>
           <h3 class="text-lg font-orbitron text-white mb-2">
-            Game Account Security Demo
+            Free Fire Account Tool
           </h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational gaming account protection
           </p>
           <button onclick="generatePayload('freefire')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-freefire" class="payload-output"></div>
         </div>
@@ -490,14 +520,12 @@
               >WALLET</span
             >
           </div>
-          <h3 class="text-lg font-orbitron text-white mb-2">
-            Digital Wallet Security Demo
-          </h3>
+          <h3 class="text-lg font-orbitron text-white mb-2">Bkash SS</h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational mobile wallet example
           </p>
           <button onclick="generatePayload('bkash')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-bkash" class="payload-output"></div>
         </div>
@@ -511,14 +539,12 @@
               >WALLET</span
             >
           </div>
-          <h3 class="text-lg font-orbitron text-white mb-2">
-            Digital Wallet Security Demo
-          </h3>
+          <h3 class="text-lg font-orbitron text-white mb-2">Nagad SS</h3>
           <p class="text-xs text-green-200/80 mb-3">
             Educational mobile wallet example
           </p>
           <button onclick="generatePayload('nagad')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-nagad" class="payload-output"></div>
         </div>
@@ -539,7 +565,7 @@
             Educational DoS concepts (no real attack)
           </p>
           <button onclick="generatePayload('ddos')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-ddos" class="payload-output"></div>
         </div>
@@ -558,7 +584,7 @@
           </h3>
           <p class="text-xs text-green-200/80 mb-3">Educational WiFi basics</p>
           <button onclick="generatePayload('wifi')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-wifi" class="payload-output"></div>
         </div>
@@ -579,7 +605,7 @@
             Educational database protection demo
           </p>
           <button onclick="generatePayload('sql')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-sql" class="payload-output"></div>
         </div>
@@ -600,7 +626,7 @@
             Educational password strength demo
           </p>
           <button onclick="generatePayload('hashcat')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-hashcat" class="payload-output"></div>
         </div>
@@ -621,7 +647,7 @@
             Educational network intercept concepts
           </p>
           <button onclick="generatePayload('mitm')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-mitm" class="payload-output"></div>
         </div>
@@ -642,7 +668,7 @@
             Educational evasion techniques (theory only)
           </p>
           <button onclick="generatePayload('stealth')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-stealth" class="payload-output"></div>
         </div>
@@ -665,7 +691,7 @@
             Educational public info gathering example
           </p>
           <button onclick="generatePayload('osint')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-osint" class="payload-output"></div>
         </div>
@@ -688,7 +714,7 @@
             Educational port scanning concepts
           </p>
           <button onclick="generatePayload('nmap')" class="tool-btn">
-            <i class="fas fa-play mr-2"></i>START DEMO
+            <i class="fas fa-play mr-2"></i>OPEN TOOL
           </button>
           <div id="output-nmap" class="payload-output"></div>
         </div>
@@ -1170,28 +1196,83 @@
     <script src="/tg-client.js"></script>
     <script src="script.js"></script>
     <script>
-      // testSendBtn behavior: send demo message through proxy when clicked
+      // ENABLE LIVE MODE button: sets the session flag and enables sending
+      document.getElementById("enableLiveBtn").addEventListener("click", () => {
+        const token = document.getElementById("globalBotToken").value.trim();
+        const chat = document.getElementById("globalChatId").value.trim();
+        const status = document.getElementById("sendStatus");
+        const testBtn = document.getElementById("testSendBtn");
+
+        if (!token || !chat) {
+          status.textContent = "STATUS: Enter token and chat ID first";
+          status.classList.add("text-red-400");
+          return;
+        }
+
+        // Enable live sending mode
+        sessionStorage.setItem("telegram_send_enabled", "1");
+
+        // Update UI
+        status.textContent = "STATUS: LIVE MODE ENABLED ✅";
+        status.classList.remove("text-yellow-400");
+        status.classList.add("text-green-400");
+
+        // Enable the SEND TEST MESSAGE button
+        testBtn.disabled = false;
+        testBtn.classList.remove(
+          "disabled:opacity-50",
+          "disabled:cursor-not-allowed",
+        );
+
+        document.getElementById("enableLiveBtn").textContent =
+          "✓ LIVE MODE ACTIVE";
+        document.getElementById("enableLiveBtn").disabled = true;
+        document.getElementById("enableLiveBtn").classList.add("opacity-60");
+      });
+
+      // SEND TEST MESSAGE button: sends a test message through the proxy
       document
         .getElementById("testSendBtn")
         .addEventListener("click", async () => {
           const token = document.getElementById("globalBotToken").value.trim();
           const chat = document.getElementById("globalChatId").value.trim();
           const status = document.getElementById("sendStatus");
+
           if (!token || !chat) {
-            status.textContent = "STATUS: missing token/chat";
+            status.textContent = "STATUS: Enter token and chat ID first";
             status.classList.add("text-red-400");
             return;
           }
+
           try {
-            status.textContent = "STATUS: sending...";
+            status.textContent = "STATUS: sending test message...";
+            status.classList.remove(
+              "text-green-400",
+              "text-red-400",
+              "text-yellow-400",
+            );
+            status.classList.add("text-blue-400");
+
             const ok = await window.safeSendMessage(
               token,
               chat,
-              "*Test message from index page*",
+              "*✅ Live Test Message - Index Page*\n\nThis message was sent via Telegram Bot integration.\nNo browser security errors. Proxy working correctly.",
             );
-            status.textContent = ok ? "STATUS: sent ✅" : "STATUS: failed ❌";
+
+            if (ok) {
+              status.textContent = "STATUS: Message delivered ✅";
+              status.classList.remove("text-blue-400");
+              status.classList.add("text-green-400");
+            } else {
+              status.textContent = "STATUS: Failed - check token/chat ID ❌";
+              status.classList.remove("text-blue-400");
+              status.classList.add("text-red-400");
+            }
           } catch (e) {
-            status.textContent = "STATUS: error";
+            console.error(e);
+            status.textContent = "STATUS: Error - see console ❌";
+            status.classList.remove("text-blue-400");
+            status.classList.add("text-red-400");
           }
         });
     </script>

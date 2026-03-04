@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Open Source Intelligence Demo</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      input,
+      button {
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Open Source Intelligence Demo</h1>
+    <p>Search a mock dataset of public profiles.</p>
+    <input type="text" id="query" placeholder="Search name" />
+    <button id="search">Search</button>
+    <ul id="results"></ul>
+    <script>
+      const data = [
+        { name: "Alice", info: "Engineer at Acme Corp" },
+        { name: "Bob", info: "Lives in Metropolis" },
+        { name: "Charlie", info: "Runs a public blog" },
+      ];
+      document.getElementById("search").addEventListener("click", () => {
+        const q = document.getElementById("query").value.toLowerCase();
+        const res = data.filter((d) => d.name.toLowerCase().includes(q));
+        const list = document.getElementById("results");
+        list.innerHTML = "";
+        res.forEach((r) => {
+          const li = document.createElement("li");
+          li.textContent = `${r.name}: ${r.info}`;
+          list.appendChild(li);
+        });
+      });
+    </script>
+  </body>
+</html>

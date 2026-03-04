@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SQL Injection Awareness</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      label,
+      input,
+      button {
+        display: block;
+        margin: 5px 0;
+      }
+      code {
+        background: #f0f0f0;
+        padding: 2px 4px;
+      }
+      #debug {
+        margin-top: 10px;
+        color: #555;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>SQL Injection Awareness</h1>
+    <p>
+      Try logging in with real credentials (user:&quot;admin&quot;
+      pass:&quot;secret&quot;) or enter <code>' OR '1'='1</code> as username or
+      password to see how unsanitized input can bypass checks. The example shows
+      the generated SQL query.
+    </p>
+    <form id="loginForm">
+      <label>Username: <input type="text" id="user" /></label>
+      <label>Password: <input type="text" id="pass" /></label>
+      <button type="submit">Login</button>
+    </form>
+    <p id="result"></p>
+    <pre id="debug"></pre>
+    <script>
+      const users = { admin: "secret" };
+      document.getElementById("loginForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const u = document.getElementById("user").value;
+        const p = document.getElementById("pass").value;
+        const query =
+          "SELECT * FROM users WHERE username='" +
+          u +
+          "' AND password='" +
+          p +
+          "'";
+
+        let result = "Access denied";
+        if (u === "admin" && p === "secret") result = "Access granted";
+        else if (query.includes("' OR '1'='1"))
+          result = "Access granted (SQL injection!)";
+
+        document.getElementById("result").textContent = result;
+        document.getElementById("debug").textContent = query;
+      });
+    </script>
+  </body>
+</html>

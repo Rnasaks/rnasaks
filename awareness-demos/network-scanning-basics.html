@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Network Scanning Basics</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      input,
+      button {
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Network Scanning Basics</h1>
+    <p>
+      Enter a host and click "Scan" to simulate checking a few common ports.
+    </p>
+    <input type="text" id="host" placeholder="example.com" />
+    <button id="scan">Scan</button>
+    <pre id="output"></pre>
+    <script>
+      document.getElementById("scan").addEventListener("click", () => {
+        const host = document.getElementById("host").value;
+        const ports = [22, 80, 443, 8080];
+        const out = ports
+          .map((p) => `${host}:${p} ${Math.random() < 0.5 ? "open" : "closed"}`)
+          .join("\n");
+        document.getElementById("output").textContent = out;
+      });
+    </script>
+  </body>
+</html>

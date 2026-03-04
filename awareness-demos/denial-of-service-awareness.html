@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Denial of Service Awareness</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      button {
+        padding: 10px 20px;
+      }
+      #status {
+        color: red;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Denial of Service Awareness</h1>
+    <p>
+      This page simulates a server receiving a flood of requests. It is purely
+      educational – no real traffic is generated.
+    </p>
+    <button id="hitBtn">Send request</button>
+    <div>Requests sent: <span id="counter">0</span></div>
+    <p id="status"></p>
+    <script>
+      let count = 0;
+      const counter = document.getElementById("counter");
+      const status = document.getElementById("status");
+      const btn = document.getElementById("hitBtn");
+      btn.addEventListener("click", () => {
+        count++;
+        counter.textContent = count;
+        if (count > 50) {
+          status.textContent = "Server overloaded! (simulation)";
+          btn.disabled = true;
+        }
+      });
+    </script>
+  </body>
+</html>

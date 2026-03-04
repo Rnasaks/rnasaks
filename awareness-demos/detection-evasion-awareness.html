@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Detection Evasion Awareness</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      textarea {
+        width: 100%;
+        height: 80px;
+      }
+      button {
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Detection Evasion Awareness</h1>
+    <p>
+      Enter some text and click "Obfuscate" to see a simple encoding that might
+      evade naive filters.
+    </p>
+    <textarea id="txt" placeholder="Enter text"></textarea><br />
+    <button id="obs">Obfuscate</button>
+    <div id="out" style="white-space: pre-wrap; margin-top: 10px"></div>
+    <script>
+      document.getElementById("obs").addEventListener("click", () => {
+        const t = document.getElementById("txt").value;
+        const encoded = btoa(t);
+        document.getElementById("out").textContent = encoded;
+      });
+    </script>
+  </body>
+</html>
